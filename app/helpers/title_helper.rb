@@ -9,7 +9,7 @@ module TitleHelper
   end
 
   def title
-    @title || "Q-Auth"
+    @title || "Q-Project"
   end
 
 end

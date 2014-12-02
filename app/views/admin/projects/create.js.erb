@@ -1,0 +1,25 @@
+<% if @project.errors.blank? %>
+	
+	// Fill the right box with first project details
+	$('#div_project_details').html("<%= escape_javascript(render(:partial=>'show', :locals=>{:user => @member})) %>");
+	
+	// Add the newly created item to the list
+  $("#div_project_collections").prepend("<div id=\"div_project_<%= @project.id %>\"><%= escape_javascript(render(:partial => 'item', :locals => { :project => @project })) %></div>")
+  $("#div_project_empty").hide();
+  
+  // Close Modal
+  closeModal();
+
+<% else %>
+	
+  // Show the new form in the pop up form.
+  heading = "Create Project";
+  bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
+  showModal(heading, bodyContent);
+  validateProjectForm();
+  
+  // Populate Server Side Errors
+  errorMessages = <%= @project.errors.full_messages.to_json.html_safe %>;
+  populateServerSideErrors('project', errorMessages);
+	
+<% end %>

@@ -1,0 +1,15 @@
+<%# describes about each user %>
+<div class="web-stats info clearfix" style="margin-bottom:5px;padding:5px;height:auto;">
+
+   	<div class="visible-md visible-lg pull-left margin-right-10" style="width:15%;">
+      <%= display_image(project, :logo, "50px") %>
+   	</div>
+   	<div class="pull-left" style="width:80%;">
+   		<%= link_to project.name, admin_project_path(project), :remote=>true, :class=>"text-color-blue fs-14" %>
+		<div class="text-color-red fs-12"><%= project.client.name if project.client %></div>
+    	<div class="text-color-gray fs-11"> <%= scrap_word(project.description, 120) %></div>
+    </div>
+
+</div>
+
+

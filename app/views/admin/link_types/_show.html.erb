@@ -1,0 +1,27 @@
+
+<%# Displays a detailed view of the link_type %>
+<%# Display Flash Message if any only in case of ajax request %>
+<% if request.xhr? %>
+	<%= render :partial=>"layouts/common/flash_message" %>
+<% end %>
+
+<div class="panel panel-profile">
+  <div class="panel-body" style="height:auto;">
+    <div class="basic-profile" style="height:auto;padding:10px;">
+      <%= link_to display_image(@link_type, :picture),
+                  upload_image_link(@link_type, admin_link_type_path(@link_type), :picture),
+                  :remote => true %>
+      <div class="pull-left mb-20 text-color-gray">
+        <div class="fs-18 text-color-blue"><%= @link_type.name %></div>
+        <div class="fs-12 text-color-gray"> <%= @link_type.description %></div>
+      </div>
+      <div class="cl"></div>
+    </div>
+
+  </div>
+</div>
+
+<%#= render :partial => "widgets/more_details", :locals=>{:data_model => @link_type,
+                      :edit_link => edit_admin_link_type_path(@link_type),
+                      :delete_link => admin_link_type_path(@link_type)} %>
+

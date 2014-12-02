@@ -1,0 +1,68 @@
+
+<%# Renders a partial which is used to create a new project %>
+
+<%= form_for([:admin, @project], :html => {:id=>"form_project", :class=>"mb-0 form-horizontal", :role => "form", :method => (@project.new_record? ? :post : :put), :remote=>true}) do |f| %>
+
+  <div class="modal-body">
+
+    <%= @project.errors[:base].to_sentence %>
+
+    <%= hidden_field_tag :faction, @project.new_record? ? admin_projects_path : admin_projects_path(@project) %>
+    <%= hidden_field_tag :fmethod, @project.new_record? ? "POST" : "PUT" %>
+
+    <div class="form-inputs">
+
+
+      <!-- Name (string) -->
+      <%= render :partial=>"field", :locals=>{:object=>@project,
+                                              :object_name=>'project',
+                                              :field_name=>'name',
+                                              :display_name=>'Name',
+                                              :field_type=>'string',
+                                              :input_type=>'text',
+                                              :required=>true,
+                                              :place_holder=>"e.g: Put a suitable example here."} %>
+
+      <!-- Description (string) -->
+      <%= render :partial=>"field", :locals=>{:object=>@project,
+                                              :object_name=>'project',
+                                              :field_name=>'description',
+                                              :display_name=>'Description',
+                                              :field_type=>'string',
+                                              :input_type=>'text',
+                                              :required=>true,
+                                              :place_holder=>"e.g: Put a suitable example here."} %>
+
+      <!-- Pretty Url (string) -->
+      <%= render :partial=>"field", :locals=>{:object=>@project,
+                                              :object_name=>'project',
+                                              :field_name=>'pretty_url',
+                                              :display_name=>'Pretty Url',
+                                              :field_type=>'string',
+                                              :input_type=>'text',
+                                              :required=>true,
+                                              :place_holder=>"a-z, A-Z, 0-9 & hyphens. No special characters and spaces"} %>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <div class="pull-right">
+      <% button_text = "#{@project.new_record? ? "Create" : "Update"} Item" %>
+			<%# if @project.new_record? %>
+				<%#= link_to "Cancel", "#", :class => "btn", :remote=>true %>
+			<%# else %>
+				<%#= link_to 'Back', projects_path, :class=>"btn ml-10", :remote => true unless @project.new_record? %>
+			<%# end %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      <%= submit_tag button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ...", :class=>"btn btn-primary ml-10" %>
+    </div>
+
+  </div>
+
+	<div class="cl-10"></div>
+
+<% end %>
+

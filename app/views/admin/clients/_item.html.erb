@@ -1,0 +1,18 @@
+<%# describes about each user %>
+<div class="web-stats info clearfix" style="margin-bottom:5px;padding:5px;height:auto;">
+
+    <div class="visible-md visible-lg pull-left margin-right-10" style="width:15%;">
+      <%= display_image(client, :logo, "50px") %>
+    </div>
+    <div class="pull-left" style="width:80%;">
+      <%= link_to client.name, admin_client_path(client), :remote=>true, :class=>"text-color-blue fs-14" %>
+      <% location = client.display_address %>
+      <% unless location.blank? %>
+      	<div class="text-color-green fs-11"><i class="fa fa-map-marker"></i> <%= location %> </div>
+      <% end %>
+      <div class="text-color-gray fs-11"> <%= scrap_word(client.description, 120) %></div>
+    </div>
+
+</div>
+
+

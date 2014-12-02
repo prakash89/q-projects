@@ -1,4 +1,4 @@
-QAuth::Application.routes.draw do
+QProject::Application.routes.draw do
 
 
   ## ----------
@@ -40,10 +40,6 @@ QAuth::Application.routes.draw do
 
   namespace :admin do
 
-    resources :users do
-      get :change_status, on: :member
-    end
-
     resources :projects do
       get :change_status, on: :member
       resources :roles, :only=>[:new, :create, :destroy]
@@ -53,8 +49,6 @@ QAuth::Application.routes.draw do
     resources :clients
     resources :link_types
     resources :images
-    resources :departments
-    resources :designations
 
   end
 

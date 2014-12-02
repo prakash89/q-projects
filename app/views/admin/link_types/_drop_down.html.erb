@@ -1,0 +1,12 @@
+<div class="btn-group mt-10 mb-10" style="width:100%;">
+  <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
+    Choose a Link Type <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <% @link_types.each do |link_type| %>
+      <li><%= link_to link_type.name, admin_link_type_path(link_type), :remote=>true %></li>
+    <% end %>
+    <%= content_tag :li, link_to_next_page(@link_types, 'Next Page', :remote => true) %>
+    <%= content_tag :li, link_to_previous_page(@link_types, 'Previous Page', :remote => true) %>
+  </ul>
+</div>

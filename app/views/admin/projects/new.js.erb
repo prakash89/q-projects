@@ -1,0 +1,5 @@
+// Show the new form in the pop up form.
+heading = "Create Project";
+bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
+showModal(heading, bodyContent);
+validateProjectForm();

@@ -1,6 +1,6 @@
 <div class="navbar">
 	<a href="#" onclick="return false;" class="btn pull-left toggle-sidebar"><i class="fa fa-list"></i></a>
-	<a class="navbar-brand" href="index.html">Q-Auth</a>
+	<a class="navbar-brand" href="index.html">Q-Project</a>
 
 	<!-- Top right user menu -->
 	<ul class="nav navbar-nav user-menu pull-right">
@@ -118,11 +118,11 @@
 
 		<% if @current_user %>
 			<li class="dropdown user-name">
-				<a class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/theme/avatarSeven.png" class="user-avatar" alt="" /><%= @current_user.display_name %></a>
+				<a class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/theme/avatarSeven.png" class="user-avatar" alt="" /><%= @current_user.name %></a>
 				<ul class="dropdown-menu right inbox user">
 					<li class="user-avatar">
-						<img src="/assets/theme/avatarSeven.png" class="user-avatar" alt="<%= @current_user.display_name %>" />
-						<%= @current_user.display_name %>
+						<img src="/assets/theme/avatarSeven.png" class="user-avatar" alt="<%= @current_user.name %>" />
+						<%= @current_user.name %>
 					</li>
 					<li>
 						<i class="fa fa-user avatar"></i>

@@ -1,0 +1,63 @@
+
+<%# Displays a detailed view of the client %>
+<%# Display Flash Message if any only in case of ajax request %>
+<% if request.xhr? %>
+	<%= render :partial=>"layouts/common/flash_message" %>
+<% end %>
+
+<div class="panel panel-profile">
+  <div class="panel-body" style="height:auto;">
+    <div class="basic-profile" style="height:auto;padding:10px;">
+      <%= link_to display_image(@client, :logo),
+                  upload_image_link(@client, admin_client_path(@client), :logo),
+                  :remote => true %>
+      <div class="pull-left mb-20 text-color-gray">
+        <div class="fs-18 text-color-blue"><%= @client.name %></div>
+        <% location = @client.display_address %>
+        <% unless location.blank? %>
+          <div class="text-color-green fs-11"><i class="fa fa-map-marker"></i> <%= location %> </div>
+        <% end %>
+        <div class="fs-12 text-color-gray"> <%= @client.description %></div>
+      </div>
+      <div class="cl"></div>
+    </div>
+
+  </div>
+  <div class="panel-footer">
+    <div class="row text-color-white clearfix fs-12 p-5">
+      <div class="col-xs-3"><i class="fa fa-rub margin-right-5"> </i> <%= @client.projects.count %> Projects</div>
+      <div class="col-xs-3"><i class="fa fa-user margin-right-5"> </i> <%= @client.users.count %> Users</div>
+    </div>
+  </div>
+</div>
+
+<div id="div_client_projects">
+  <%= render :partial => "admin/clients/projects/index", :locals=>{:client => @client} %>
+</div>
+
+<% users = @client.users %>
+<% if users.any? %>
+  <div class="panel panel-archon mt-10">
+    <div class="panel-heading">
+      <h3 class="panel-title">Users
+        <span class="pull-right">
+          <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
+          <a href="#" class="panel-close"><i class="fa fa-times"></i></a>
+        </span>
+      </h3>
+    </div>
+    <div class="panel-body clearfix">
+
+      <% users.each do |user| %>
+        <div class="pull-left" style="width:48%;margin-right:2%;">
+          <%= render :partial => "user", :locals=>{:user => user } %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+<% end %>
+
+<%#= render :partial => "widgets/more_details", :locals=>{:data_model => @client,
+                      :edit_link => edit_admin_client_path(@client),
+                      :delete_link => admin_client_path(@client)} %>

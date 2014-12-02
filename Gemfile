@@ -10,6 +10,8 @@ gem 'state_machine'
 
 gem 'linkedin'
 gem 'carrierwave'
+gem 'rolify'
+gem 'typhoeus'
 
 # Oauth provider 7 client
 gem 'doorkeeper', '~> 0.7.0'

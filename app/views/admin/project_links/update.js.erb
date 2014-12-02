@@ -1,0 +1,20 @@
+<% if @project_link.errors.blank? %>
+	
+	$('#div_project_links').html("<%= escape_javascript(render(:partial=>'index', :locals=>{:project => @project})) %>");
+  
+  // Close Modal
+  closeModal();
+
+<% else %>
+	
+  // Show the new form in the pop up form.
+  heading = "Edit Project Link";
+  bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
+  showModal(heading, bodyContent);
+  validateProjectLinkForm();
+  
+  // Populate Server Side Errors
+  errorMessages = <%= @project_link.errors.full_messages.to_json.html_safe %>;
+  populateServerSideErrors('project_link', errorMessages);
+
+<% end %>

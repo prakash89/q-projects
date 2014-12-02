@@ -1,0 +1,23 @@
+<%# describes about each project_link %>
+<div class="box hoverable p-10 box-border-black">
+
+  <div class="row">
+    <div class="col-md-4 visible-md visible-lg">
+      <%= display_image(project_link, :photo, "100%") %>
+    </div>
+    <div class="col-md-8">
+      <%= link_to project_link.link_type.name, admin_project_project_link_path(project_link),
+          :remote=>true, :class=>"text-color-blue fs-16" %><br/>
+      <div class="text-color-gray fs-12"><%#= scrap_word(project_link.description, 160) %></div>
+  	</div>
+  </div>
+
+  <div class="mt-10 pull-right text-color-gray fs-11 visible-md visible-lg">
+    <%= display_time(project_link.created_at) %>
+  </div>
+
+  <div class="cl"></div>
+
+
+</div>
+

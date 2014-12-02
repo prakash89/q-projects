@@ -1,0 +1,74 @@
+
+<%# Renders a partial which is used to create a new role %>
+
+<%= form_for([:admin, @project, @role], :html => {:id=>"form_role", :class=>"mb-0 form-horizontal", :role => "form", :method => (@role.new_record? ? :post : :put), :remote=>true}) do |f| %>
+
+  <div class="modal-body">
+
+    <%= @role.errors[:base].to_sentence %>
+
+    <%= hidden_field_tag :faction, @role.new_record? ? admin_project_roles_path : admin_project_roles_path(@role) %>
+    <%= hidden_field_tag :fmethod, @role.new_record? ? "POST" : "PUT" %>
+
+    <div class="form-inputs">
+
+      <!-- Choose User - Drop Down -->
+      <div class="form-group ">
+        <label for="inp_name" class="col-md-4 control-label">User
+          <span class="text-color-red ml-10 margin-right-5 pull-right">*</span>
+        </label>
+        <div class="col-md-8">
+          <% if @member %>
+            <%= @member.display_name %>
+            <%= hidden_field_tag "role[member_id]", @member.id %>
+          <% else %>
+            <%= collection_select(:role, :member_id, User.select("id, first_name, last_name").order("first_name, last_name ASC").all, :id, :display_name, {:prompt=>true}, {:class => 'form-control'}) %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Choose Role - Drop Down -->
+      <div class="form-group ">
+        <label for="inp_name" class="col-md-4 control-label">Role
+          <span class="text-color-red ml-10 margin-right-5 pull-right">*</span>
+        </label>
+        <div class="col-md-8">
+          <% list = ConfigCenter::Roles::LIST %>
+          <%#= select_tag(:name, list, :id, :display_name, {:prompt=>true}, {:class => 'form-control'}) %>
+          <%= f.select(:name, options_for_select(Array[*list.collect {|v,i| [v,v] }].sort, :selected => f.object.name), {:prompt=>true}, {:class => 'form-control'}) %>
+        </div>
+      </div>
+
+      <!-- Name (string) -->
+      <%#= render :partial=>"field", :locals=>{:object=>@role,
+                                              :object_name=>'role',
+                                              :field_name=>'name',
+                                              :display_name=>'Role',
+                                              :field_type=>'string',
+                                              :input_type=>'text',
+                                              :required=>true,
+                                              :place_holder=>"e.g: Put a suitable example here."} %>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <div class="pull-right">
+      <% button_text = "#{@role.new_record? ? "Create" : "Update"} Item" %>
+			<%# if @role.new_record? %>
+				<%#= link_to "Cancel", "#", :class => "btn", :remote=>true %>
+			<%# else %>
+				<%#= link_to 'Back', roles_path, :class=>"btn ml-10", :remote => true unless @role.new_record? %>
+			<%# end %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      <%= submit_tag button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ...", :class=>"btn btn-primary ml-10" %>
+    </div>
+
+  </div>
+
+	<div class="cl-10"></div>
+
+<% end %>
+
