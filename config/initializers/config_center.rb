@@ -116,7 +116,6 @@ module ConfigCenter
     QSERVERS_URL = "http://localhost:9009"
     QRECRUIT_URL = "http://localhost:9010"
     QCAREER_URL = "http://localhost:9011"
-
   end
 
 

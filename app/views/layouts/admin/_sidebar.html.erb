@@ -58,22 +58,12 @@
 				<%= link_to raw("<i class=\"fa fa-power-off\"></i> Sign Out"), user_sign_out_path, :method => :delete %>
 			</li>
 
-			<li class="nav-header">Q-Apps</li>
+			<li class="nav-header">APIS</li>
 
-			<li>
-				<%= link_to raw("<i class=\"fa fa-user\"></i> Q-Auth"), ConfigCenter::QApps::QAUTH_URL %>
-		    <%= link_to raw("<i class=\"fa fa-dashboard\"></i> Q-Projects"), ConfigCenter::QApps::QPROJECTS_URL %>
-		    <%= link_to raw("<i class=\"fa fa-clock-o\"></i> Q-Time"), ConfigCenter::QApps::QTIME_URL %>
-		    <%= link_to raw("<i class=\"fa fa-bars\"></i> Q-Leaves"), ConfigCenter::QApps::QLEAVES_URL %>
-		    <%= link_to raw("<i class=\"fa fa-slideshare\"></i> Q-Meeting"), ConfigCenter::QApps::QMEETING_URL %>
-		    <%= link_to raw("<i class=\"fa fa-cubes\"></i> Q-Assets"), ConfigCenter::QApps::QASSETS_URL %>
-
-		    <%= link_to raw("<i class=\"fa fa-comments-o\"></i> Q-Messages"), ConfigCenter::QApps::QMESSAGES_URL %>
-		    <%= link_to raw("<i class=\"fa fa-check-square\"></i> Q-Secure"), ConfigCenter::QApps::QSECURE_URL %>
-		    <%= link_to raw("<i class=\"fa fa-cloud\"></i> Q-Servers"), ConfigCenter::QApps::QSERVERS_URL %>
-		    <%= link_to raw("<i class=\"fa fa-graduation-cap\"></i> Q-Recruit"), ConfigCenter::QApps::QRECRUIT_URL %>
-		    <%= link_to raw("<i class=\"fa fa-file-text\"></i> Q-Career"), ConfigCenter::QApps::QCAREER_URL %>
-			</li>
+			<li><%= link_to raw("<i class=\"fa fa-anchor\"></i> Clients List API"), "#", :method => :delete %></li>
+			<li><%= link_to raw("<i class=\"fa fa-anchor\"></i> Client Detail API"), "#", :method => :delete %></li>
+			<li><%= link_to raw("<i class=\"fa fa-anchor\"></i> Projects List API"), "#", :method => :delete %></li>
+			<li><%= link_to raw("<i class=\"fa fa-anchor\"></i> Project Detail API"), "#", :method => :delete %></li>
 
 		</ul>
 
