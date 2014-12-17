@@ -10,6 +10,10 @@ module AuthenticationHelper
     user_sign_in_url
   end
 
+  def user_profile_url
+    ConfigCenter::QApps::QAUTH_URL + "/user/profile"
+  end
+
   def current_user
     return @current_user if @current_user
     # Check if the user exists with the auth token present in session
