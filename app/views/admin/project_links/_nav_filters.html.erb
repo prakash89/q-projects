@@ -4,6 +4,6 @@
 <%= form_for ProjectLink.new, :url => admin_project_project_links_path, :method => :get, :remote=>true, :html=>{:class=>"pull-right", :style=>"margin-bottom:0px;"} do |f| %>
 	<div class="input-append">
 	  <input type="text" style="height:13px;width:120px;" name="project_link[query]">
-	  <button type="submit" class="btn btn-mini btn-primary"><i class="icon-search icon-white margin-right-5"></i>Search Item ...</button>
+	  <button type="submit" class="btn btn-mini btn-primary"><i class="icon-search icon-white mr-5"></i>Search Item ...</button>
 	</div>
 <%- end %>

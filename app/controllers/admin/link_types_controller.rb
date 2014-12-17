@@ -1,7 +1,7 @@
 class Admin::LinkTypesController < Admin::BaseController
 
   #authorize_actions_for Item, :actions => {:index => :delete}
-  skip_before_filter :require_admin, :set_navs, :parse_pagination_params
+  skip_before_filter :require_admin
   before_filter :require_super_admin
 
   # GET /link_types

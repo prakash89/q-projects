@@ -1,7 +1,7 @@
 <%# describes about each user %>
 <div class="web-stats info clearfix" style="margin-bottom:5px;padding:5px;height:65px;overflow:hidden;">
 
-    <div class="visible-md visible-lg pull-left margin-right-10" style="width:20%;max-height:50px;overflow:hidden;">
+    <div class="visible-md visible-lg pull-left mr-10" style="width:20%;max-height:50px;overflow:hidden;">
       <%= display_image(project_link.link_type, :picture, "40px") %>
     </div>
     <div class="pull-left" style="width:75%;">
@@ -11,7 +11,7 @@
 
     <%= link_to raw("<i class=\"fa fa-times\"></i> "), admin_project_project_link_path(project, project_link), method: :delete, data: { confirm: 'Are you sure?' }, :style=>"color: #898989;", :class=>"pull-right", :remote=>true %>
 
-   	<%= link_to raw("<i class=\"fa fa-pencil\"></i>"), edit_admin_project_project_link_path(project, project_link), :class=>"pull-right margin-right-5", :remote=>true, :style=>"color: #898989;" %>
+   	<%= link_to raw("<i class=\"fa fa-pencil\"></i>"), edit_admin_project_project_link_path(project, project_link), :class=>"pull-right mr-5", :remote=>true, :style=>"color: #898989;" %>
 
    	<%= link_to raw("<i class=\"fa fa-globe\"></i> Checkout Link"), project_link.url, :class=>"pull-left fs-10", :target=>"_blank" %>
 

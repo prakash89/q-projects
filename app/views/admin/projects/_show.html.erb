@@ -8,23 +8,26 @@
 <div class="panel panel-profile">
   <div class="panel-body" style="height:auto;">
     <div class="basic-profile" style="height:auto;padding:10px;">
-      <%= link_to display_image(@project, :logo),
-                  upload_image_link(@project, admin_project_path(@project), :logo),
-                  :remote => true %>
+
+      <% change_picture_url = upload_image_link(@project, admin_project_path(@project), :logo) %>
+      <%= link_to display_image(@project, :logo), change_picture_url, :remote => true %>
+
       <div class="pull-left mb-20 text-color-gray">
         <div class="fs-18 text-color-blue"><%= link_to @project.name, project_dashboard_path(pretty_url: @project.pretty_url) %></div>
         <div class="description text-color-red"><%= @project.client.name if @project.client %></div>
       </div>
+
       <div class="cl"></div>
+
     </div>
 
   </div>
   <div class="panel-footer">
-    <div class="row text-color-white clearfix fs-12 p-5">
-      <div class="col-xs-3 email"><i class="fa fa-envelope margin-right-20"> </i> Info 1</div>
-      <div class="col-xs-3 email"><i class="fa fa-envelope margin-right-20"> </i> Info 2</div>
-      <div class="col-xs-3 email"><i class="fa fa-envelope margin-right-20"> </i> Info 3</div>
-      <div class="col-xs-3 email"><i class="fa fa-envelope margin-right-20"> </i> Info 4</div>
+    <div class="clearfix fs-12 p-5">
+      <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Change Picture"), change_picture_url, :class=>"btn btn-default btn-xs pull-left", :remote=>true %>
+
+      <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Edit"), edit_admin_project_path(@project), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
+        <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), admin_project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
     </div>
   </div>
 </div>
@@ -37,6 +40,10 @@
   <%= render :partial => "admin/project_links/index", :locals=>{:project => @project} %>
 </div>
 
-<%#= render :partial => "widgets/more_details", :locals=>{:data_model => @project,
+<%= render :partial => "widgets/more_details", :locals=>{
+                      :data_model => @project,
+                      #:data_columns => [:id, :name, :username, :email],
+                      :heading => "Project Details",
+                      :display_footer => true,
                       :edit_link => edit_admin_project_path(@project),
                       :delete_link => admin_project_path(@project)} %>

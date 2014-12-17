@@ -29,7 +29,7 @@ QProject::Application.routes.draw do
 
   # Sign In URLs for users
   get     '/sign_in',         to: "public/user_sessions#sign_in",         as:  :user_sign_in
-  post    '/create_session',  to: "public/user_sessions#create_session",  as:  :create_user_session
+  get    '/create_session',   to: "public/user_sessions#create_session",  as:  :create_user_session
 
   # Logout Url
   delete  '/sign_out' ,       to: "public/user_sessions#sign_out",        as:  :user_sign_out

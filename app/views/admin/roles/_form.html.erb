@@ -15,14 +15,14 @@
       <!-- Choose User - Drop Down -->
       <div class="form-group ">
         <label for="inp_name" class="col-md-4 control-label">User
-          <span class="text-color-red ml-10 margin-right-5 pull-right">*</span>
+          <span class="text-color-red ml-10 mr-5 pull-right">*</span>
         </label>
         <div class="col-md-8">
           <% if @member %>
             <%= @member.display_name %>
             <%= hidden_field_tag "role[member_id]", @member.id %>
           <% else %>
-            <%= collection_select(:role, :member_id, User.select("id, first_name, last_name").order("first_name, last_name ASC").all, :id, :display_name, {:prompt=>true}, {:class => 'form-control'}) %>
+            <%= collection_select(:role, :member_id, User.select("id, name").order("name ASC").all, :id, :name, {:prompt=>true}, {:class => 'form-control'}) %>
           <% end %>
         </div>
       </div>
@@ -30,7 +30,7 @@
       <!-- Choose Role - Drop Down -->
       <div class="form-group ">
         <label for="inp_name" class="col-md-4 control-label">Role
-          <span class="text-color-red ml-10 margin-right-5 pull-right">*</span>
+          <span class="text-color-red ml-10 mr-5 pull-right">*</span>
         </label>
         <div class="col-md-8">
           <% list = ConfigCenter::Roles::LIST %>

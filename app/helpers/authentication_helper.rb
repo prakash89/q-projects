@@ -46,9 +46,9 @@ module AuthenticationHelper
     end
   end
 
-  # def get_redirect_back_url
-  #   session[:redirect_back_url] || redirect_url_after_sign_in
-  # end
+  def get_redirect_back_url
+    session[:redirect_back_url] || default_redirect_url_after_sign_in
+  end
 
   # def redirect_url_if_sign_in_fails
   #   sign_in_url

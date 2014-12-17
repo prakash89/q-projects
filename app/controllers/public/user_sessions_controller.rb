@@ -15,38 +15,21 @@ module Public
         # Redirect to the Q-Auth sign in page with required params
         params_hsh = {
                         client_app: ConfigCenter::Authentication::CLIENT_APP_NAME,
-                        redirect_back_url: get_redirect_back_url
+                        redirect_back_url: create_user_session_url
                       }
         url = add_query_params(ConfigCenter::Authentication::SIGN_IN_URL, params_hsh)
-        # Update the user info
-        # user_info = API.ping_user_info_url.get_user_info
-        # current_user.update_attributes(user_info)
-        # current_user.save
         redirect_to url
       end
     end
 
     def create_session
-      login_handle = params[:login_handle]
-      password = params[:login_password]
-
-      begin
-        obj = User.authenticate(login_handle, password)
-        success = obj.first
-        data = obj.last
-
-        if success
-          @current_user = data
-          store_session
-          redirect_to redirect_url_after_sign_in
-        else
-          store_flash_message("Invalid Login Handle or Password", :error)
-          render :new
-        end
-      rescue CouldntConnectError
-        url = ConfigCenter::Authentication::SIGN_IN_URL
-        store_flash_message("Couldn't connect to Q-Auth Server. Please make sure that the authenticating server is running and the url #{url} is valid.", :error)
-        render :new
+      response = User.create_session(params[:auth_token])
+      if response.is_a?(User)
+        @current_user = response
+        session[:id] = @current_user.id
+        redirect_to get_redirect_back_url
+      else
+        raise response["errors"]["name"]
       end
     end
 
@@ -59,7 +42,7 @@ module Public
 
       session.delete(:id)
 
-      redirect_to redirect_url_after_sign_out
+      redirect_to default_redirect_url_after_sign_in
     end
 
     private

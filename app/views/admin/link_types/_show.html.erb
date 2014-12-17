@@ -7,13 +7,24 @@
 
 <div class="panel panel-profile">
   <div class="panel-body" style="height:auto;">
+
     <div class="basic-profile" style="height:auto;padding:10px;">
-      <%= link_to display_image(@link_type, :picture),
-                  upload_image_link(@link_type, admin_link_type_path(@link_type), :picture),
-                  :remote => true %>
+      <% change_picture_url = upload_image_link(@link_type, admin_link_type_path(@link_type), :picture) %>
+      <%= link_to display_image(@link_type, :picture), change_picture_url, :remote => true %>
+
       <div class="pull-left mb-20 text-color-gray">
         <div class="fs-18 text-color-blue"><%= @link_type.name %></div>
         <div class="fs-12 text-color-gray"> <%= @link_type.description %></div>
+      </div>
+
+      <div class="cl"></div>
+      <div class="pull-left mt-20">
+        <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Change Picture"), change_picture_url, :class=>"btn btn-default btn-xs pull-left", :remote=>true %>
+      </div>
+
+      <div class="pull-right mt-20">
+        <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Edit"), edit_admin_link_type_path(@link_type), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
+        <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), admin_link_type_path(@link_type), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
       </div>
       <div class="cl"></div>
     </div>
@@ -21,7 +32,11 @@
   </div>
 </div>
 
-<%#= render :partial => "widgets/more_details", :locals=>{:data_model => @link_type,
+<%= render :partial => "widgets/more_details", :locals=>{
+                      :data_model => @link_type,
+                      #:data_columns => [:id, :name, :username, :email],
+                      :heading => "Link Type Details",
+                      :display_footer => true,
                       :edit_link => edit_admin_link_type_path(@link_type),
                       :delete_link => admin_link_type_path(@link_type)} %>
 

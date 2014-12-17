@@ -1,12 +1,7 @@
 <% roles = project.roles.order("name ASC") %>
 <div class="panel panel-archon mt-10">
   <div class="panel-heading">
-    <h3 class="panel-title">Team Members
-      <span class="pull-right">
-        <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
-        <a href="#" class="panel-close"><i class="fa fa-times"></i></a>
-      </span>
-    </h3>
+    <h3 class="panel-title">Team Members</h3>
   </div>
   <div class="panel-body clearfix">
 
@@ -25,7 +20,7 @@
   </div>
 
   <div class="panel-footer clearfix">
-    <%= link_to raw("<i class=\"fa fa-plus margin-right-5\"></i> Add a new member"), new_admin_project_role_path(project), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
+    <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Add a new member"), new_admin_project_role_path(project), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
   </div>
 
 </div>

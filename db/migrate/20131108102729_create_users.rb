@@ -10,7 +10,6 @@ class CreateUsers < ActiveRecord::Migration
       t.text :biography
 
       t.string :phone, :null => true, :limit=>16
-      t.string :status, :null => false, :default=>"pending", :limit=>16
 
       t.string :skype, :null => true, :limit=>128
       t.string :linkedin, :null => true, :limit=>128
@@ -21,9 +20,8 @@ class CreateUsers < ActiveRecord::Migration
 
       t.string :department, :null => true, :limit=>128
       t.string :designation, :null => true, :limit=>128
-      t.string :designation_overridden, :null => true, :limit=>56
 
-      t.string :profile_picture_url, :null => true, :limit=>512
+      t.string :profile_image_url, :null => true, :limit=>512
 
       ## Token authenticatable
       t.integer :q_auth_uid

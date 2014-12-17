@@ -106,6 +106,46 @@ class User < ActiveRecord::Base
     self.update_attribute(:status, ConfigCenter::User::BLOCKED)
   end
 
+  def self.create_session(auth_token)
+    qauth_url = ConfigCenter::QApps::QAUTH_URL + "/api/v1/my_profile?auth_token="
+    request = Typhoeus::Request.new(
+      qauth_url,
+      method: :get,
+      headers: {"Authorization" => "Token token=#{auth_token}"},
+      verbose: false
+    )
+    response = JSON.parse(request.run.body)
+
+    if response["success"]
+      # Checking if we already have this user in our database
+      user = User.where(username: response["data"]["username"]).first || User.new
+      user.id = response["data"]["id"]
+      user.name = response["data"]["name"]
+      user.username = response["data"]["username"]
+      user.email = response["data"]["email"]
+      user.biography = response["data"]["biography"]
+      user.phone = response["data"]["phone"]
+      user.skype = response["data"]["skype"]
+      user.linkedin = response["data"]["linkedin"]
+      user.city = response["data"]["city"]
+      user.state = response["data"]["state"]
+      user.country = response["data"]["country"]
+      user.auth_token = response["data"]["auth_token"]
+      user.user_type = response["data"]["user_type"]
+      user.profile_image_url = response["data"]["profile_image_url"]
+
+      user.designation = response["data"]["designation_title"]
+      user.department = response["data"]["department_name"]
+
+      if user.valid?
+        user.save
+      end
+      return user
+    else
+      return response
+    end
+  end
+
   def self.authenticate(login_handle, password)
     url = ConfigCenter::Authentication::SIGN_IN_URL
     Rails.logger.info "Logging to #{url} in as #{login_handle}"

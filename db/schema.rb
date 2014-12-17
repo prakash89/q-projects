@@ -82,20 +82,18 @@ ActiveRecord::Schema.define(version: 20131110125601) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "username",               limit: 32,                      null: false
-    t.string   "email",                                                  null: false
+    t.string   "username",          limit: 32,  null: false
+    t.string   "email",                         null: false
     t.text     "biography"
-    t.string   "phone",                  limit: 16
-    t.string   "status",                 limit: 16,  default: "pending", null: false
-    t.string   "skype",                  limit: 128
-    t.string   "linkedin",               limit: 128
-    t.string   "city",                   limit: 128
-    t.string   "state",                  limit: 128
-    t.string   "country",                limit: 128
-    t.string   "department",             limit: 128
-    t.string   "designation",            limit: 128
-    t.string   "designation_overridden", limit: 56
-    t.string   "profile_picture_url",    limit: 512
+    t.string   "phone",             limit: 16
+    t.string   "skype",             limit: 128
+    t.string   "linkedin",          limit: 128
+    t.string   "city",              limit: 128
+    t.string   "state",             limit: 128
+    t.string   "country",           limit: 128
+    t.string   "department",        limit: 128
+    t.string   "designation",       limit: 128
+    t.string   "profile_image_url", limit: 512
     t.integer  "q_auth_uid"
     t.string   "auth_token"
     t.string   "user_type"
