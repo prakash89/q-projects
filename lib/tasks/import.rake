@@ -173,10 +173,6 @@ namespace 'import' do
       user.state = row[:state]
       user.country = row[:country]
 
-      user.designation = row[:designation]
-      user.department = row[:department]
-      user.profile_picture_url = row[:profile_picture_url]
-
       if user.valid?
         user.save
         puts "#{row[:username]} saved".green

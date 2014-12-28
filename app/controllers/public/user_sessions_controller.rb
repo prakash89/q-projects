@@ -8,17 +8,16 @@ module Public
 
     def sign_in
       if current_user
-        redirect_to user_dashboard_url
-        return
+        if current_user.token_expired?
+          update_user_profile_data_and_auth_token
+          return
+        else
+          redirect_to get_redirect_back_url
+          return
+        end
       else
-        # Storing the user object
-        # Redirect to the Q-Auth sign in page with required params
-        params_hsh = {
-                        client_app: ConfigCenter::Authentication::CLIENT_APP_NAME,
-                        redirect_back_url: create_user_session_url
-                      }
-        url = add_query_params(ConfigCenter::Authentication::SIGN_IN_URL, params_hsh)
-        redirect_to url
+        update_user_profile_data_and_auth_token
+        return
       end
     end
 

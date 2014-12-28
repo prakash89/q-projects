@@ -8,9 +8,7 @@
     <% if roles.any? %>
       <% roles.each do |role| %>
         <% role.users.each do |user| %>
-          <div class="pull-left" style="width:48%;margin-right:2%;">
-            <%= render :partial => "admin/roles/show", :locals=>{:project => project, :role => role, :user => user} %>
-          </div>
+          <%= render :partial => "admin/roles/show", :locals=>{:project => project, :role => role, :user => user} %>
         <% end %>
       <% end %>
     <% else %>
@@ -19,8 +17,8 @@
 
   </div>
 
-  <div class="panel-footer clearfix">
-    <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Add a new member"), new_admin_project_role_path(project), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
+  <div class="panel-footer1 clearfix">
+    <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Add a new member"), new_admin_project_role_path(project), :class=>"btn btn-default btn-xs pull-right m-10", :remote=>true %>
   </div>
 
 </div>

@@ -106,8 +106,16 @@ class User < ActiveRecord::Base
     self.update_attribute(:status, ConfigCenter::User::BLOCKED)
   end
 
+  def token_expired?
+    if self.token_expires_at.nil?
+      return true
+    else
+      self.token_expires_at <= Time.now
+    end
+  end
+
   def self.create_session(auth_token)
-    qauth_url = ConfigCenter::QApps::QAUTH_URL + "/api/v1/my_profile?auth_token="
+    qauth_url = ConfigCenter::QApps::QAUTH_URL + "/api/v1/my_profile"
     request = Typhoeus::Request.new(
       qauth_url,
       method: :get,
@@ -118,8 +126,9 @@ class User < ActiveRecord::Base
 
     if response["success"]
       # Checking if we already have this user in our database
-      user = User.where(username: response["data"]["username"]).first || User.new
-      user.id = response["data"]["id"]
+      #binding.pry
+      user = User.where(id: response["data"]["id"]).first || User.new
+      #user.id = response["data"]["id"]
       user.name = response["data"]["name"]
       user.username = response["data"]["username"]
       user.email = response["data"]["email"]
@@ -131,11 +140,16 @@ class User < ActiveRecord::Base
       user.state = response["data"]["state"]
       user.country = response["data"]["country"]
       user.auth_token = response["data"]["auth_token"]
+      user.token_expires_at = (Time.now + 1.day)
       user.user_type = response["data"]["user_type"]
-      user.profile_image_url = response["data"]["profile_image_url"]
 
-      user.designation = response["data"]["designation_title"]
-      user.department = response["data"]["department_name"]
+      user.thumb_url = response["data"].try(:[],"profile_image").try(:[],"thumb")
+      user.medium_url = response["data"].try(:[],"profile_image").try(:[],"medium")
+      user.large_url = response["data"].try(:[],"profile_image").try(:[],"large")
+      user.original_url = response["data"].try(:[],"profile_image").try(:[],"original")
+
+      user.designation = response["data"].try(:[],"designation").try(:[],"title")
+      user.department = response["data"].try(:[],"department").try(:[],"name")
 
       if user.valid?
         user.save

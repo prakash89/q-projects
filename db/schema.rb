@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131110125601) do
+ActiveRecord::Schema.define(version: 20141221031449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,24 +82,28 @@ ActiveRecord::Schema.define(version: 20131110125601) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "username",          limit: 32,  null: false
-    t.string   "email",                         null: false
+    t.string   "username",         limit: 32,  null: false
+    t.string   "email",                        null: false
     t.text     "biography"
-    t.string   "phone",             limit: 16
-    t.string   "skype",             limit: 128
-    t.string   "linkedin",          limit: 128
-    t.string   "city",              limit: 128
-    t.string   "state",             limit: 128
-    t.string   "country",           limit: 128
-    t.string   "department",        limit: 128
-    t.string   "designation",       limit: 128
-    t.string   "profile_image_url", limit: 512
+    t.string   "phone",            limit: 16
+    t.string   "skype",            limit: 128
+    t.string   "linkedin",         limit: 128
+    t.string   "city",             limit: 128
+    t.string   "state",            limit: 128
+    t.string   "country",          limit: 128
+    t.string   "department",       limit: 128
+    t.string   "designation",      limit: 128
+    t.string   "thumb_url",        limit: 512
+    t.string   "medium_url",       limit: 512
+    t.string   "large_url",        limit: 512
+    t.string   "original_url",     limit: 512
     t.integer  "q_auth_uid"
     t.string   "auth_token"
     t.string   "user_type"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "token_expires_at"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree

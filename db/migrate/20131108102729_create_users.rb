@@ -21,7 +21,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :department, :null => true, :limit=>128
       t.string :designation, :null => true, :limit=>128
 
-      t.string :profile_image_url, :null => true, :limit=>512
+      t.string :thumb_url, :null => true, :limit=>512
+      t.string :medium_url, :null => true, :limit=>512
+      t.string :large_url, :null => true, :limit=>512
+      t.string :original_url, :null => true, :limit=>512
 
       ## Token authenticatable
       t.integer :q_auth_uid

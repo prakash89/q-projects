@@ -14,7 +14,7 @@
 
 
       <!-- Name (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@client,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@client,
                                               :object_name=>'client',
                                               :field_name=>'name',
                                               :display_name=>'Name',
@@ -24,53 +24,53 @@
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
       <!-- Description (text) -->
-      <%= render :partial=>"field", :locals=>{:object=>@client,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@client,
                                               :object_name=>'client',
                                               :field_name=>'description',
                                               :display_name=>'Description',
                                               :field_type=>'text',
                                               :input_type=>'textarea',
-                                              :required=>true,
+                                              :required=>false,
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
       <!-- City (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@client,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@client,
                                               :object_name=>'client',
                                               :field_name=>'city',
                                               :display_name=>'City',
                                               :field_type=>'string',
                                               :input_type=>'text',
-                                              :required=>true,
+                                              :required=>false,
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
       <!-- State (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@client,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@client,
                                               :object_name=>'client',
                                               :field_name=>'state',
                                               :display_name=>'State',
                                               :field_type=>'string',
                                               :input_type=>'text',
-                                              :required=>true,
+                                              :required=>false,
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
       <!-- Country (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@client,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@client,
                                               :object_name=>'client',
                                               :field_name=>'country',
                                               :display_name=>'Country',
                                               :field_type=>'string',
                                               :input_type=>'text',
-                                              :required=>true,
+                                              :required=>false,
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
       <!-- Pretty Url (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@client,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@client,
                                               :object_name=>'client',
                                               :field_name=>'pretty_url',
                                               :display_name=>'Pretty Url',
                                               :field_type=>'string',
                                               :input_type=>'text',
-                                              :required=>true,
+                                              :required=>false,
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
     </div>

@@ -14,7 +14,7 @@
 
 
       <!-- Name (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@link_type,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@link_type,
                                               :object_name=>'link_type',
                                               :field_name=>'name',
                                               :display_name=>'Name',
@@ -24,33 +24,33 @@
                                               :place_holder=>"e.g: JIRA."} %>
 
       <!-- Description (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@link_type,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@link_type,
                                               :object_name=>'link_type',
                                               :field_name=>'description',
                                               :display_name=>'Description',
                                               :field_type=>'string',
                                               :input_type=>'text',
-                                              :required=>true,
+                                              :required=>false,
                                               :place_holder=>"Put a suitable description"} %>
 
       <!-- Theme (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@link_type,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@link_type,
                                               :object_name=>'link_type',
                                               :field_name=>'theme',
                                               :display_name=>'Theme',
                                               :field_type=>'string',
                                               :input_type=>'text',
-                                              :required=>true,
+                                              :required=>false,
                                               :place_holder=>"e.g: Jira."} %>
 
       <!-- Button Text (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@link_type,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@link_type,
                                               :object_name=>'link_type',
                                               :field_name=>'button_text',
                                               :display_name=>'Button Text',
                                               :field_type=>'string',
                                               :input_type=>'text',
-                                              :required=>true,
+                                              :required=>false,
                                               :place_holder=>"e.g: Launch JIRA"} %>
 
     </div>

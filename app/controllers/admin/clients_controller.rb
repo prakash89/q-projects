@@ -51,7 +51,7 @@ class Admin::ClientsController < Admin::BaseController
   # POST /clients
   def create
     ## Creating the client object
-    @client = Client.new(params[:client].permit(:name, :description, :pretty_url ,:city, :state, :country))
+    @client = Client.new(client_params)
 
     ## Validating the data
     @client.valid?
@@ -92,7 +92,7 @@ class Admin::ClientsController < Admin::BaseController
     @client = Client.find(params[:id])
 
     ## Updating the @client object with params
-    @client.assign_attributes(params[:client].permit(:name, :description, :pretty_url ,:city, :state, :country))
+    @client.assign_attributes(client_params)
 
     ## Validating the data
     @client.valid?
@@ -162,6 +162,10 @@ class Admin::ClientsController < Admin::BaseController
 
   def set_navs
     set_nav("admin/clients")
+  end
+
+  def client_params
+    params[:client].permit(:name, :description, :pretty_url ,:city, :state, :country)
   end
 
   def get_collections

@@ -29,7 +29,13 @@
 
 			        <tr>
 						<td class="visible-lg"><%= i+1 %></td>
-						<td><%= link_to display_image(project, :logo, "50px"), project_dashboard_path(pretty_url: project.pretty_url) %></td>
+						<td>
+							<%#= link_to display_image(project, :logo, "50px"), project_dashboard_path(pretty_url: project.pretty_url) %>
+							<%= link_to display_image(project, "logo.image.url",
+                        width: "50px",
+                        place_holder: {width: 50, height: 50, text: "<No Image>"}
+                        ), project_dashboard_path(pretty_url: project.pretty_url) %>
+						</td>
 						<td class="visible-lg"><%= link_to project.name, project_dashboard_path(pretty_url: project.pretty_url) %> </td>
 						<td class="visible-lg"><%= project.client.name if project.client %> </td>
 						<td>
@@ -38,14 +44,14 @@
 							<button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button>
 						</td>
 					</tr>
-			        
+
 			      <% end %>
 			    <% else %>
 			    	<tr>
 						<td colspan="5" class="visible-lg text-align-center text-color-gray fs-11">You are not a part of any project.</td>
 					</tr>
 			    <% end %>
-				
+
 			</tbody>
 		</table>
 	</div>
