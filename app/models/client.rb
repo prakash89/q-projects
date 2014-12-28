@@ -2,7 +2,6 @@ class Client < ActiveRecord::Base
 
   # Validations
   validates :name, presence: true
-  validates :pretty_url, presence: true
 
   # Associations
   has_many :projects

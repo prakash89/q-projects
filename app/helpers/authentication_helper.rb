@@ -14,6 +14,17 @@ module AuthenticationHelper
     ConfigCenter::QApps::QAUTH_URL + "/user/profile"
   end
 
+  def update_user_profile_data_and_auth_token
+    # Storing the user object
+    # Redirect to the Q-Auth sign in page with required params
+    params_hsh = {
+                    client_app: ConfigCenter::Authentication::CLIENT_APP_NAME,
+                    redirect_back_url: create_user_session_url
+                  }
+    url = add_query_params(ConfigCenter::Authentication::SIGN_IN_URL, params_hsh)
+    redirect_to url
+  end
+
   def current_user
     return @current_user if @current_user
     # Check if the user exists with the auth token present in session
@@ -22,7 +33,9 @@ module AuthenticationHelper
 
   def require_user
     current_user
-    unless @current_user
+    if @current_user
+      update_user_profile_data_and_auth_token if @current_user.token_expired?
+    else
       @heading = translate("authentication.error")
       @alert = translate("authentication.permission_denied")
       store_flash_message("#{@heading}: #{@alert}", :errors)

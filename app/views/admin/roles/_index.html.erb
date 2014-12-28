@@ -8,9 +8,7 @@
     <% if roles.any? %>
       <% roles.each do |role| %>
         <% role.users.each do |user| %>
-          <div class="pull-left" style="width:48%;margin-right:2%;">
-            <%= render :partial => "admin/roles/show", :locals=>{:project => project, :role => role, :user => user} %>
-          </div>
+          <%= render :partial => "admin/roles/show", :locals=>{:project => project, :role => role, :user => user} %>
         <% end %>
       <% end %>
     <% else %>

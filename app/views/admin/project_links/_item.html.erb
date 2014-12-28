@@ -3,7 +3,10 @@
 
   <div class="row">
     <div class="col-md-4 visible-md visible-lg">
-      <%= display_image(project_link, :photo, "100%") %>
+      <%= display_image(project_link, "photo.image.url",
+                        width: "100%",
+                        place_holder: {width: 50, height: 50, text: "<No Image>"}
+                        ) %>
     </div>
     <div class="col-md-8">
       <%= link_to project_link.link_type.name, admin_project_project_link_path(project_link),

@@ -2,7 +2,10 @@
 <div class="web-stats info clearfix" style="margin-bottom:5px;padding:5px;height:65px;overflow:hidden;">
 
     <div class="visible-md visible-lg pull-left mr-10" style="width:20%;max-height:50px;overflow:hidden;">
-      <%= display_image(project_link.link_type, :picture, "40px") %>
+      <%= display_image(project_link.link_type, "picture.image.url",
+                        width: "40px",
+                        place_holder: {width: 40, height: 40, text: "<No Image>"}
+                        ) %>
     </div>
     <div class="pull-left" style="width:75%;">
       <%= project_link.link_type.name %>

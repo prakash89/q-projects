@@ -19,7 +19,7 @@
         </label>
         <div class="col-md-8">
           <% if @member %>
-            <%= @member.display_name %>
+            <%= @member.name %>
             <%= hidden_field_tag "role[member_id]", @member.id %>
           <% else %>
             <%= collection_select(:role, :member_id, User.select("id, name").order("name ASC").all, :id, :name, {:prompt=>true}, {:class => 'form-control'}) %>
@@ -34,20 +34,10 @@
         </label>
         <div class="col-md-8">
           <% list = ConfigCenter::Roles::LIST %>
-          <%#= select_tag(:name, list, :id, :display_name, {:prompt=>true}, {:class => 'form-control'}) %>
+          <%#= select_tag(:name, list, :id, :name, {:prompt=>true}, {:class => 'form-control'}) %>
           <%= f.select(:name, options_for_select(Array[*list.collect {|v,i| [v,v] }].sort, :selected => f.object.name), {:prompt=>true}, {:class => 'form-control'}) %>
         </div>
       </div>
-
-      <!-- Name (string) -->
-      <%#= render :partial=>"field", :locals=>{:object=>@role,
-                                              :object_name=>'role',
-                                              :field_name=>'name',
-                                              :display_name=>'Role',
-                                              :field_type=>'string',
-                                              :input_type=>'text',
-                                              :required=>true,
-                                              :place_holder=>"e.g: Put a suitable example here."} %>
 
     </div>
 

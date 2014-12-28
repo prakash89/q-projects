@@ -1,0 +1,184 @@
+<div class="navbar">
+	<a href="#" onclick="return false;" class="btn pull-left toggle-sidebar"><i class="fa fa-list"></i></a>
+	<a class="navbar-brand" href="index.html">Q-Project</a>
+
+	<!-- Top right user menu -->
+	<ul class="nav navbar-nav user-menu pull-right">
+
+		<% if @current_user %>
+			<li class="dropdown user-name pull-right" style="">
+				<a class="dropdown-toggle" data-toggle="dropdown" style="margin:0px;padding:0px;padding-bottom:5px;">
+					<img src="/assets/theme/avatarSeven.png" class="user-avatar pull-left mr-10 mt-10" alt="" />
+					<%= content_tag :span, @current_user.name, class: "visible-lg pull-left" %>
+					<div class="cl"></div>
+				</a>
+				<ul class="dropdown-menu right inbox user">
+					<li class="user-avatar">
+						<img src="/assets/theme/avatarSeven.png" class="user-avatar" alt="<%= @current_user.name %>" />
+						<%= @current_user.name %>
+					</li>
+					<li>
+						<i class="fa fa-user avatar"></i>
+						<div class="message">
+							<%= link_to "My Profile", user_profile_path, :class=>"username float-left" %>
+						</div>
+					</li>
+					<li>
+						<i class="fa fa-cogs avatar"></i>
+						<div class="message">
+							<%= link_to "Account Settings", user_settings_path, :class=>"username float-left" %>
+						</div>
+					</li>
+					<li>
+						<%= link_to raw("<i class=\"fa fa-power-off\"></i> Sign Out"), user_sign_out_path, :method => :delete %>
+					</li>
+				</ul>
+			</li><!-- / dropdown -->
+		<% end %>
+
+		<!-- Q-Apps Links -->
+		<li class="dropdown user-name pull-right" style="">
+			<a class="dropdown-toggle" data-toggle="dropdown" style="padding-top:10px;margin:0px;">
+				<div class="profile-pic-name cl">
+					<i class="fa fa-bars avatar pull-left mt-10 mr-10"></i>
+					<span class="visible-lg pull-left">Q-Apps</span>
+				</div>
+			</a>
+
+			<ul class="dropdown-menu right inbox user">
+
+				<li></li>
+
+				<li>
+					<i class="fa fa-user avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Auth", ConfigCenter::QApps::QAUTH_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-dashboard avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Projects", ConfigCenter::QApps::QPROJECTS_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-clock-o avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Time", ConfigCenter::QApps::QTIME_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-bars avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Leaves", ConfigCenter::QApps::QLEAVES_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-slideshare avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Meeting", ConfigCenter::QApps::QMEETING_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-cubes avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Assets", ConfigCenter::QApps::QASSETS_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-comments-o avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Messages", ConfigCenter::QApps::QMESSAGES_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-check-square avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Secure", ConfigCenter::QApps::QSECURE_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-cloud avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Servers", ConfigCenter::QApps::QSERVERS_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-graduation-cap avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Recruit", ConfigCenter::QApps::QRECRUIT_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-file-text avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Career", ConfigCenter::QApps::QCAREER_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+				<li></li>
+			</ul>
+		</li><!-- / dropdown -->
+
+		<!-- Messages -->
+		<li class="dropdown pull-right pl-10" style="">
+			<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i></a>
+			<ul class="dropdown-menu right inbox">
+				<li class="dropdown-menu-title">
+					INBOX <span>(25)</span>
+				</li>
+				<li>
+					<img src="/assets/theme/avatarTwo.png" alt="" class="avatar">
+					<div class="message">
+						<span class="username">Anusha</span>
+						<span class="mini-details">(6) <i class="fa fa-paper-clip"></i></span>
+						<span class="time pull-right"> 06:58 PM</span>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's ... </p>
+					</div>
+				</li>
+				<li>
+					<img src="/assets/theme/avatarFive.png" alt="" class="avatar">
+					<div class="message">
+						<span class="username">Veeru</span>
+						<span class="mini-details">(2) <i class="fa fa-paper-clip"></i></span>
+						<span class="time pull-right"> 09:58 AM</span>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's ... </p>
+					</div>
+				</li>
+				<li>
+					<img src="/assets/theme/avatarSix.png" alt="" class="avatar">
+					<div class="message">
+						<span class="username">Nag</span>
+						<span class="mini-details">(6) <i class="fa fa-paper-clip"></i></span>
+						<span class="time pull-right">Yesterday</span>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's ... </p>
+					</div>
+				</li>
+				<li>
+					<img src="/assets/theme/avatarSeven.png" alt="" class="avatar">
+					<div class="message">
+						<span class="username">Harish</span>
+						<span class="mini-details"> <i class="fa fa-picture-o"></i></span>
+						<span class="time pull-right">14/12/2013</span>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's ... </p>
+					</div>
+				</li>
+				<li class="dropdown-menu-footer">
+					<a href="#">View All Messages</a>
+				</li>
+			</ul>
+		</li><!-- /dropdown -->
+
+
+	</ul><!-- / Top right user menu -->
+
+</div><!-- / Navbar-->
