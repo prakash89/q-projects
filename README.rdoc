@@ -6,3 +6,17 @@ Q-Project is an application for managing the users in an organisation. It has an
 * q-project-api uses warden for authentication. (This might change in future)
 * Uses a Global Configuration for named ConfigCenter
 
+# For Hosting, create the following environment variables
+export QAUTH_URL="http://localhost:9001"
+export QPROJECTS_URL="http://localhost:9002"
+export QTIME_URL="http://localhost:9003"
+export QLEAVES_URL="http://localhost:9004"
+export QMEETING_URL="http://localhost:9005"
+export QASSETS_URL="http://localhost:9006"
+
+export QMESSAGES_URL="http://localhost:9008"
+export QSECURE_URL="http://localhost:9007"
+export QSERVERS_URL="http://localhost:9009"
+export QRECRUIT_URL="http://localhost:9010"
+export QCAREER_URL="http://localhost:9011"
+

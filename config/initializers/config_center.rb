@@ -33,7 +33,6 @@ module ConfigCenter
     PASSWORD_MAX_LEN = 256
     PASSWORD_FORMAT_REG_EXP = /\A(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9!@$#&*_\.,;:])/
     # PASSWORD_FORMAT_REG_EXP = /\A(?=.*?[a-z][A-Z])(?=.*?\d)(?=.*?[!@$&*_])/i
-
   end
 
   module Defaults
@@ -78,7 +77,6 @@ module ConfigCenter
     STATUS_LIST = [PENDING, APPROVED, BLOCKED]
 
     EXCLUDED_JSON_ATTRIBUTES = [:auth_token, :confirmation_token, :password_digest, :reset_password_token, :unlock_token, :status]
-
   end
 
   module Roles
@@ -94,28 +92,27 @@ module ConfigCenter
 
     LIST = [SCRUM_MASTER, PRODUCT_OWNER, STAKEHOLDER, AGILE_MENTOR, SCRUM_TEAM_MEMBER]
     ADMIN_ROLES = [QDASH_SUPER_ADMIN, QDASH_ADMIN]
-
-  end
-
-  module Authentication
-    SIGN_IN_URL  = "http://localhost:9001/sign_in"
-    SIGN_OUT_URL = "http://localhost:9001/sign_out"
-    CLIENT_APP_NAME = "Q-Project"
   end
 
   module QApps
-    QAUTH_URL = "http://localhost:9001"
-    QPROJECTS_URL = "http://localhost:9002"
-    QTIME_URL = "http://localhost:9003"
-    QLEAVES_URL = "http://localhost:9004"
-    QMEETING_URL = "http://localhost:9005"
-    QASSETS_URL = "http://localhost:9006"
+    QAUTH_URL = ENV["QAUTH_URL"] || "http://localhost:9001"
+    QPROJECTS_URL = ENV["QPROJECTS_URL"] || "http://localhost:9002"
+    QTIME_URL = ENV["QTIME_URL"] || "http://localhost:9003"
+    QLEAVES_URL = ENV["QLEAVES_URL"] || "http://localhost:9004"
+    QMEETING_URL = ENV["QMEETING_URL"] || "http://localhost:9005"
+    QASSETS_URL = ENV["QASSETS_URL"] || "http://localhost:9006"
 
-    QMESSAGES_URL = "http://localhost:9008"
-    QSECURE_URL = "http://localhost:9007"
-    QSERVERS_URL = "http://localhost:9009"
-    QRECRUIT_URL = "http://localhost:9010"
-    QCAREER_URL = "http://localhost:9011"
+    QMESSAGES_URL = ENV["QMESSAGES_URL"] || "http://localhost:9008"
+    QSECURE_URL = ENV["QSECURE_URL"] || "http://localhost:9007"
+    QSERVERS_URL = ENV["QSERVERS_URL"] || "http://localhost:9009"
+    QRECRUIT_URL = ENV["QRECRUIT_URL"] || "http://localhost:9010"
+    QCAREER_URL = ENV["QCAREER_URL"] || "http://localhost:9011"
+  end
+
+  module Authentication
+    SIGN_IN_URL  = QApps::QAUTH_URL + "/sign_in"
+    SIGN_OUT_URL  = QApps::QAUTH_URL + "/sign_out"
+    CLIENT_APP_NAME = "Q-Project"
   end
 
 
