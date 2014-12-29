@@ -8,6 +8,7 @@
 <div class="panel panel-profile">
   <div class="panel-body" style="height:auto;">
     <div class="basic-profile" style="height:auto;">
+
       <div class="pull-left p-20" style="width:30%;">
         <% change_picture_url = upload_image_link(@client, admin_client_path(@client), :logo) %>
         <% img_tag = display_image(@client, "logo.image.url", width: "100px", place_holder: {width: 300, height: 180, text: "<No Image>"}) %>
@@ -15,6 +16,7 @@
         <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Change Picture"), change_picture_url, :class=>"btn btn-default btn-xs pull-left mt-20", :remote=>true %>
       </div>
       <div class="pull-left p-20 text-color-gray" style="width:70%">
+
         <div class="fs-22 text-color-blue"><%= @client.name %></div>
         <% location = @client.display_address %>
         <% unless location.blank? %>

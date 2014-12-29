@@ -126,7 +126,6 @@ class User < ActiveRecord::Base
 
     if response["success"]
       # Checking if we already have this user in our database
-      #binding.pry
       user = User.where(id: response["data"]["id"]).first || User.new
       #user.id = response["data"]["id"]
       user.name = response["data"]["name"]

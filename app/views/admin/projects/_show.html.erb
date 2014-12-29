@@ -14,7 +14,6 @@
         <%= link_to img_tag, change_picture_url, :remote => true %>
         <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Change Picture"), change_picture_url, :class=>"btn btn-default btn-xs pull-left mt-20", :remote=>true %>
       </div>
-
       <div class="pull-left m-20 text-color-gray">
         <div class="fs-24 text-color-blue"><%= @project.name %></div>
         <%= link_to @project.client.name, admin_client_path(@project.client), class: "fs-16 text-color-red" if @project.client %>
