@@ -34,7 +34,13 @@ module AuthenticationHelper
   def require_user
     current_user
     if @current_user
-      update_user_profile_data_and_auth_token if @current_user.token_expired?
+      if @current_user.token_expired?
+        store_flash_message("Your session has been timed out", :notice)
+        # Reseting the auth token for user when he logs out.
+        # @current_user.update_attribute :auth_token, SecureRandom.hex
+        session.delete(:id)
+        update_user_profile_data_and_auth_token
+      end
     else
       @heading = translate("authentication.error")
       @alert = translate("authentication.permission_denied")
