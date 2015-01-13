@@ -1,10 +1,17 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+# Pick the frameworks you want:
+require "active_model/railtie"
+require "active_record/railtie"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "action_view/railtie"
+require "sprockets/railtie"
+#require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
 
 module QProject
   class Application < Rails::Application
@@ -27,20 +34,6 @@ module QProject
     config.after_initialize do
       dirs = [File.join(config.root, "lib", "core_ext", "**", "*.rb")]
       Dir[*dirs].each {|file| require file }
-    end
-
-    config.to_prepare do
-      # Base layout. Uses app/views/layouts/my_layout.html.erb
-      Doorkeeper::ApplicationController.layout "sign_in"
-
-      # Only Applications list
-      Doorkeeper::ApplicationsController.layout "admin"
-
-      # Only Authorization endpoint
-      Doorkeeper::AuthorizationsController.layout "sign_in"
-
-      # Only Authorized Applications
-      Doorkeeper::AuthorizedApplicationsController.layout "sign_in"
     end
 
   end

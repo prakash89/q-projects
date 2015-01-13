@@ -14,7 +14,6 @@ gem 'rolify'
 gem 'typhoeus'
 
 # Oauth provider 7 client
-gem 'doorkeeper', '~> 0.7.0'
 gem 'oauth2'
 
 # Use SCSS for stylesheets
@@ -42,6 +41,9 @@ gem "kaminari"
 gem "bootstrap-kaminari-views"
 gem "bootstrap-datepicker-rails"
 gem "jquery-validation-rails"
+
+gem 'q_auth_ruby_client', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/q_auth_ruby_client"
+gem 'poodle', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
 
 # Use Capistrano for deployment
 group :development do

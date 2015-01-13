@@ -14,7 +14,7 @@
 
 
       <!-- Name (string) -->
-      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@project,
+      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@project,
                                               :object_name=>'project',
                                               :field_name=>'name',
                                               :display_name=>'Name',
@@ -41,7 +41,7 @@
 
 
       <!-- Description (string) -->
-      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@project,
+      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@project,
                                               :object_name=>'project',
                                               :field_name=>'description',
                                               :display_name=>'Description',
@@ -51,7 +51,7 @@
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
       <!-- Pretty Url (string) -->
-      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@project,
+      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@project,
                                               :object_name=>'project',
                                               :field_name=>'pretty_url',
                                               :display_name=>'Pretty Url',

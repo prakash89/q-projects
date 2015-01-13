@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141221031449) do
+ActiveRecord::Schema.define(version: 20150109115624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,17 +97,19 @@ ActiveRecord::Schema.define(version: 20141221031449) do
     t.string   "medium_url",       limit: 512
     t.string   "large_url",        limit: 512
     t.string   "original_url",     limit: 512
-    t.integer  "q_auth_uid"
-    t.string   "auth_token"
-    t.string   "user_type"
+    t.string   "user_type",                    null: false
+    t.integer  "q_auth_uid",                   null: false
+    t.string   "auth_token",                   null: false
+    t.datetime "token_created_at",             null: false
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "token_expires_at"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["q_auth_uid"], name: "index_users_on_q_auth_uid", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: true do |t|
     t.integer "user_id"

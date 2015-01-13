@@ -37,15 +37,6 @@ module ConfigCenter
 
   module Defaults
 
-    # the default number of milli seconds for which resource listing pages gets refreshed:
-    REFRESH_PAGE_IN_MILLI_SECONDS = 180000
-
-    # It will list 10 items per page unless user request to load more (this is done by passing 'per_page' in url)
-    ITEMS_PER_LIST = 10
-    # It will override the per_page to 10 (default val - ITEMS_PER_LIST), in case if the user request for more items to load in a single listing page.
-    # i.e if user passes per_page=251 (greater than MAX_ITEMS_PER_LIST), system will ignore it and fall back to default no of items to be listed in a page (ITEMS_PER_LIST)
-    MAX_ITEMS_PER_LIST = 250
-
     # Default password to be assigned while mocking a user
     PASSWORD = "Password@1"
 
@@ -68,52 +59,5 @@ module ConfigCenter
       end
     end
   end
-
-  module User
-
-    PENDING = "pending"
-    APPROVED = "approved"
-    BLOCKED = "blocked"
-    STATUS_LIST = [PENDING, APPROVED, BLOCKED]
-
-    EXCLUDED_JSON_ATTRIBUTES = [:auth_token, :confirmation_token, :password_digest, :reset_password_token, :unlock_token, :status]
-  end
-
-  module Roles
-
-    QDASH_SUPER_ADMIN = "Q-Dash Super Admin"
-    QDASH_ADMIN = "Q-Dash Admin"
-
-    SCRUM_MASTER = "Scrum Master"
-    PRODUCT_OWNER = "Product Owner"
-    STAKEHOLDER = "Stakeholder"
-    AGILE_MENTOR = "Agile Mentor"
-    SCRUM_TEAM_MEMBER = "Scrum Team Member"
-
-    LIST = [SCRUM_MASTER, PRODUCT_OWNER, STAKEHOLDER, AGILE_MENTOR, SCRUM_TEAM_MEMBER]
-    ADMIN_ROLES = [QDASH_SUPER_ADMIN, QDASH_ADMIN]
-  end
-
-  module QApps
-    QAUTH_URL = ENV["QAUTH_URL"] || "http://localhost:9001"
-    QPROJECTS_URL = ENV["QPROJECTS_URL"] || "http://localhost:9002"
-    QTIME_URL = ENV["QTIME_URL"] || "http://localhost:9003"
-    QLEAVES_URL = ENV["QLEAVES_URL"] || "http://localhost:9004"
-    QMEETING_URL = ENV["QMEETING_URL"] || "http://localhost:9005"
-    QASSETS_URL = ENV["QASSETS_URL"] || "http://localhost:9006"
-
-    QMESSAGES_URL = ENV["QMESSAGES_URL"] || "http://localhost:9008"
-    QSECURE_URL = ENV["QSECURE_URL"] || "http://localhost:9007"
-    QSERVERS_URL = ENV["QSERVERS_URL"] || "http://localhost:9009"
-    QRECRUIT_URL = ENV["QRECRUIT_URL"] || "http://localhost:9010"
-    QCAREER_URL = ENV["QCAREER_URL"] || "http://localhost:9011"
-  end
-
-  module Authentication
-    SIGN_IN_URL  = QApps::QAUTH_URL + "/sign_in"
-    SIGN_OUT_URL  = QApps::QAUTH_URL + "/sign_out"
-    CLIENT_APP_NAME = "Q-Project"
-  end
-
 
 end
