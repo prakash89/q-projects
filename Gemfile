@@ -42,8 +42,10 @@ gem "bootstrap-kaminari-views"
 gem "bootstrap-datepicker-rails"
 gem "jquery-validation-rails"
 
-gem 'q_auth_ruby_client', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/q_auth_ruby_client"
-gem 'poodle', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
+gem 'q_auth_ruby_client'
+#gem 'q_auth_ruby_client', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/q_auth_ruby_client"
+gem 'poodle-rb'
+#gem 'poodle-rb', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
 
 # Use Capistrano for deployment
 group :development do
