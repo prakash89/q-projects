@@ -18,6 +18,7 @@
         <div class="fs-24 text-color-green"><%= @project.name %></div>
         <%= link_to @project.client.name, admin_client_path(@project.client), class: "fs-16 text-color-red" if @project.client %>
         <div class="fs-14"><%= @project.pretty_url %></div>
+        <div class="fs-14 mt-10"><%= @project.description %></div>
       </div>
 
       <div class="cl"></div>

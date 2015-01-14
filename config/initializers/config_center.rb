@@ -60,4 +60,18 @@ module ConfigCenter
     end
   end
 
+  module Roles
+    QDASH_SUPER_ADMIN = "Q-Dash Super Admin"
+    QDASH_ADMIN = "Q-Dash Admin"
+
+    SCRUM_MASTER = "Scrum Master"
+    PRODUCT_OWNER = "Product Owner"
+    STAKEHOLDER = "Stakeholder"
+    AGILE_MENTOR = "Agile Mentor"
+    SCRUM_TEAM_MEMBER = "Scrum Team Member"
+
+    LIST = [SCRUM_MASTER, PRODUCT_OWNER, STAKEHOLDER, AGILE_MENTOR, SCRUM_TEAM_MEMBER]
+    ADMIN_ROLES = [QDASH_SUPER_ADMIN, QDASH_ADMIN]
+  end
+
 end

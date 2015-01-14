@@ -9,7 +9,7 @@ QProject::Application.routes.draw do
   # Public pages
   # ------------
 
-  root :to => 'q_auth_ruby_client/sessions#sign_in'
+  root :to => 'welcome#home'
 
   # ------------
   # Admin pages
@@ -19,7 +19,11 @@ QProject::Application.routes.draw do
 
     resources :projects do
       get :change_status, on: :member
-      resources :roles, :only=>[:new, :create, :destroy]
+      resources :roles, :only=>[:new, :create, :destroy] do
+        collection do
+          get 'refresh'
+        end
+      end
       resources :project_links
     end
 

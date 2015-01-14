@@ -1,15 +1,12 @@
 <%# describes about each user %>
-<div class="web-stats info clearfix" style="margin-bottom:5px;padding:5px;height:auto;">
-
-    <div class="visible-md visible-lg pull-left mr-10" style="width:15%;">
+<div class="panel panel-default media p-5">
+  <a class="media-left" href="#" style="width:25%;">
     <%= display_image(link_type, "picture.image.url",
-                        width: "80%",
-                        place_holder: {width: 50, height: 50, text: "<No Image>"}
-                        ) %>
-    </div>
-    <div class="pull-left" style="width:80%;">
-      <%= link_to link_type.name, admin_link_type_path(link_type), :remote=>true, :class=>"text-color-blue fs-14" %>
-      <div class="text-color-gray fs-11"> <%= scrap_word(link_type.description, 120) %></div>
-    </div>
-
+                    place_holder: {width: 125, height: 90, text: "<No Image>"}
+                    ) %>
+  </a>
+  <div class="media-body">
+    <%= link_to link_type.name, admin_link_type_path(link_type), :remote=>true, :class=>"text-color-blue fs-14" %>
+    <div class="text-color-gray fs-11"> <%= scrap_word(link_type.description, 120) %></div>
+  </div>
 </div>

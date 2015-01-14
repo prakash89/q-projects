@@ -1,0 +1,57 @@
+<h3 class="text-center">Q-Projects</h3>
+<!-- <img src="http://www.domain.com/images/logo.png"/> -->
+<div class="cl-30"></div>
+
+<ul>
+
+  <li class="<%= nav_class("user/dashboard") %>">
+    <%= link_to raw("<i class=\"fa fa-dashboard\"></i> Dashboard"), user_dashboard_url %>
+  </li>
+
+  <% if @current_user.is_admin? %>
+
+    <li class="heading">Admin</li>
+
+    <li class="<%= nav_class("admin/clients") %>">
+      <%= link_to raw("<i class=\"fa fa-globe\"></i> Manage Clients"), admin_clients_path %>
+    </li>
+
+    <li class="<%= nav_class("admin/projects") %>">
+      <%= link_to raw("<i class=\"fa fa-rub\"></i> Manage Projects"), admin_projects_path %>
+    </li>
+
+  <% end %>
+
+  <% if @current_user.is_super_admin? %>
+
+    <li class="heading">System Configuration</li>
+
+    <li class="<%= nav_class("admin/link_types") %>">
+      <%= link_to raw("<i class=\"fa fa-link\"></i> Manage Link Types"), admin_link_types_path %>
+    </li>
+
+  <% end %>
+
+  <li class="heading">Account</li>
+
+  <li class="<%= nav_class("account/profile") %>">
+    <%= link_to raw("<i class=\"fa fa-user\"></i> My Profile"), QAuthRubyClient.configuration.q_auth_url + QAuthRubyClient.configuration.my_profile_url, target: "_blank" %>
+  </li>
+
+  <li>
+    <%= link_to raw("<i class=\"fa fa-power-off\"></i> Sign Out"), q_auth_ruby_client.sign_out_path, :method => :delete %>
+  </li>
+
+  <% if @current_user.is_super_admin? %>
+
+    <!-- <li class="heading">APIS</li>
+
+    <li><%#= link_to raw("<i class=\"fa fa-anchor\"></i> API 1"), "#", :method => :get %></li>
+    <li><%#= link_to raw("<i class=\"fa fa-anchor\"></i> API 2"), "#", :method => :get %></li>
+    <li><%#= link_to raw("<i class=\"fa fa-anchor\"></i> API 3"), "#", :method => :get %></li>
+    <li><%#= link_to raw("<i class=\"fa fa-anchor\"></i> API 4"), "#", :method => :get %></li> -->
+
+  <% end %>
+
+</ul>
+

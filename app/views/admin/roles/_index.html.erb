@@ -8,11 +8,11 @@
     <% if roles.any? %>
       <% roles.each do |role| %>
         <% role.users.each do |user| %>
-          <%= render :partial => "admin/roles/show", :locals=>{:project => project, :role => role, :user => user} %>
+          <%= render :partial => "admin/roles/item", :locals=>{:project => project, :role => role, :user => user} %>
         <% end %>
       <% end %>
     <% else %>
-      <%= content_tag :div, "There are no members in this project.", :class=>"text-align-center text-color-gray fs-11" %>
+      <%= content_tag :div, "There are no members in this project.", :class=>"text-align-center text-color-gray fs-14" %>
     <% end %>
 
   </div>

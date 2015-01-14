@@ -1,7 +1,7 @@
 <div class="panel panel-default media p-5">
   <a class="media-left" href="#" style="width:25%;">
     <%= display_image(client, "logo.image.url",
-                        place_holder: {width: 100, height: 50, text: "<No Image>"}
+                        place_holder: {width: 125, height: 90, text: "<No Image>"}
                         ) %>
   </a>
   <div class="media-body">
@@ -10,7 +10,7 @@
     <% unless location.blank? %>
       <div class="text-color-green fs-12 mt-5"><i class="fa fa-map-marker"></i> <%= location %> </div>
     <% end %>
-    <!-- <div class="text-color-gray fs-12"> <%#= scrap_word(client.description, 120) %></div> -->
+    <div class="text-color-gray fs-12"> <%= scrap_word(client.description, 120) %></div>
   </div>
 </div>
 

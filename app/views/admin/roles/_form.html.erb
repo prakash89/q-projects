@@ -23,6 +23,7 @@
             <%= hidden_field_tag "role[member_id]", @member.id %>
           <% else %>
             <%= collection_select(:role, :member_id, User.select("id, name").order("name ASC").all, :id, :name, {:prompt=>true}, {:class => 'form-control'}) %>
+            <%= link_to "Refresh User List", refresh_admin_project_roles_url, remote: true, class: "pull-right" %>
           <% end %>
         </div>
       </div>

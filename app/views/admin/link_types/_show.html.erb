@@ -5,22 +5,21 @@
 	<%= render :partial=>"layouts/poodle/common/flash_message" %>
 <% end %>
 
-<div class="panel panel-profile">
+<div class="panel panel-default">
   <div class="panel-body" style="height:auto;">
-
-    <div class="basic-profile" style="height:auto;padding:10px;">
-      <% change_picture_url = upload_image_link(@link_type, admin_link_type_path(@link_type), :picture) %>
-      <% img_tag = display_image(@link_type, "picture.image.url",
-                        width: "120px",
-                        place_holder: {width: 120, height: 60, text: "<No Image>"}
-                        ) %>
-      <%= link_to img_tag, change_picture_url, :remote => true %>
-
-      <div class="pull-left mb-20 text-color-gray">
+    <div style="height:auto;">
+      <div class="pull-left" style="width:30%;">
+        <% change_picture_url = upload_image_link(@link_type, admin_link_type_path(@link_type), :picture) %>
+        <% img_tag = display_image(@link_type, "picture.image.url",
+                          width: "120px",
+                          place_holder: {width: 120, height: 60, text: "<No Image>"}
+                          ) %>
+        <%= link_to img_tag, change_picture_url, :remote => true %>
+      </div>
+      <div class="pull-left ml-10 text-color-gray" style="width:65%">
         <div class="fs-22 text-color-blue"><%= @link_type.name %></div>
         <div class="fs-18 text-color-gray"> <%= @link_type.description %></div>
       </div>
-
     </div>
   </div>
 

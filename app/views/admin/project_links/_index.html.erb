@@ -5,19 +5,33 @@
   </div>
   <div class="panel-body clearfix">
 
-    <% if project_links.any? %>
-      <% project_links.each do |project_link| %>
-        <div class="pull-left" style="width:48%;margin-right:2%;">
-          <%= render :partial => "admin/project_links/show", :locals=>{:project => project, :project_link => project_link} %>
-        </div>
-      <% end %>
-    <% else %>
-      <%= content_tag :div, "There are no project links added to this project.", :class=>"text-align-center text-color-gray fs-11" %>
-    <% end %>
+    <table class="table table-condensed table-hover table-striped mt-20">
+      <thead>
+        <tr>
+          <th>Sl.</th>
+          <th>Image</th>
+          <th>Project Link</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if project_links.any? %>
+          <% project_links.each do |project_link| %>
+            <tr class="text-color-gray">
+              <%= render :partial => "admin/project_links/item", :locals=>{:project => project, :project_link => project_link} %>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr class="text-color-gray">
+            <td colspan="4">There are no project links added to this project.</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
   </div>
 
-  <div class="panel-footer1 clearfix">
+  <div class="clearfix">
     <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Add a new link"), new_admin_project_project_link_path(project), :class=>"btn btn-default btn-xs pull-right m-20", :remote=>true %>
   </div>
 

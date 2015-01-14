@@ -2,8 +2,10 @@
 <div class="pull-left m-10">
 
   <div>
- 	  <%= content_tag :div, class: "mask-img-bdr-rounded", style: "width:100px;height:100px;" do %>
-      <%= display_user_image(user, width: "100%", place_holder: {width: 100, height: 100, text: "Member"} ) %>
+ 	  <%= content_tag :div, class: "rounded", style: "width:100px;height:100px;" do %>
+      <%= display_user_image(user, width: "100%",
+            place_holder: {width: 100, height: 100, text: "Member"},
+            :url_domain => QAuthRubyClient.configuration.q_auth_url ) %>
     <% end %>
   </div>
  	<%= link_to user.name, "#", :class=>"text-color-blue fs-16 mt-10" %>
