@@ -1,54 +1,40 @@
-
-<%# Displays a detailed view of the link_type %>
-<%# Display Flash Message if any only in case of ajax request %>
-<% if request.xhr? %>
-	<%= render :partial=>"layouts/poodle/common/flash_message" %>
-<% end %>
+<%= flash_message() -%>
 
 <div class="panel panel-default">
   <div class="panel-body" style="height:auto;">
     <div style="height:auto;">
       <div class="pull-left" style="width:30%;">
-        <% change_picture_url = upload_image_link(@link_type, admin_link_type_path(@link_type), :picture) %>
-        <% img_tag = display_image(@link_type, "picture.image.url",
-                          width: "120px",
-                          place_holder: {width: 120, height: 60, text: "<No Image>"}
-                          ) %>
-        <%= link_to img_tag, change_picture_url, :remote => true %>
+        <%
+          redirect_url = admin_link_type_path(@link_type)
+          change_picture_url = upload_image_link(@link_type, redirect_url, :picture)
+        %>
+        <%= theme_image(@link_type, redirect_url, :picture, "picture.image.url", change_picture_url: change_picture_url) %>
       </div>
       <div class="pull-left ml-10 text-color-gray" style="width:65%">
-        <div class="fs-22 text-color-blue"><%= @link_type.name %></div>
-        <div class="fs-18 text-color-gray"> <%= @link_type.description %></div>
+        <%= theme_panel_heading(@link_type.name) %>
+        <%= theme_panel_sub_heading(@link_type.theme, nil) %>
+        <%= theme_panel_description(@link_type.description) %>
       </div>
     </div>
   </div>
 
   <div class="panel-footer mt-20">
     <div class="clearfix fs-12 p-5">
-      <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Change Picture"), change_picture_url, :class=>"btn btn-default btn-xs pull-left", :remote=>true %>
-
-      <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Edit"), edit_admin_link_type_path(@link_type), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
-
-      <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), admin_link_type_path(@link_type), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
+      <%= theme_edit_button(edit_admin_link_type_path(@link_type)) %>
+      <%= theme_delete_button(admin_link_type_path(@link_type)) %>
     </div>
   </div>
 
   <div class="cl"></div>
 </div>
 
-<%= render :partial => "widgets/more_details", :locals=>{
-                      :data_model => @link_type,
-                      :data_columns => [:theme, :button_text],
-                      :heading => "Link Type Details",
-                      :display_footer => true,
-                      :edit_link => edit_admin_link_type_path(@link_type),
-                      :delete_link => admin_link_type_path(@link_type)} %>
+<%= theme_more_widget(@link_type,
+          data_columns: [:theme, :button_text],
+          heading: "Link Type Details") %>
 
-<% if @current_user.is_super_admin? %>
-  <%= render :partial => "widgets/more_details", :locals=>{
-                        :data_model => @link_type,
-                        :data_columns => [:id, :created_at, :updated_at],
-                        :heading => "Technical Details",
-                        :display_footer => false} %>
-<% end %>
+<%= theme_more_widget(@link_type,
+          data_columns: [:id, :created_at, :updated_at],
+          super_admin: true) %>
+
+
 

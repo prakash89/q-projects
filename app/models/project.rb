@@ -4,7 +4,6 @@ class Project < ActiveRecord::Base
 
   # Validations
   validates :name, presence: true
-  validates :client, presence: true
 
   # Associations
   belongs_to :client, foreign_key: :client_id

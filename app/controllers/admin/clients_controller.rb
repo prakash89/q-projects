@@ -1,8 +1,6 @@
 class Admin::ClientsController < Admin::BaseController
 
-  # GET /clients
   def index
-
     get_collections
 
     respond_to do |format|
@@ -12,7 +10,6 @@ class Admin::ClientsController < Admin::BaseController
     end
   end
 
-  # GET /clients/1
   def show
     ## Creating the client object
     @client = Client.find(params[:id])
@@ -24,7 +21,6 @@ class Admin::ClientsController < Admin::BaseController
     end
   end
 
-  # GET /clients/new
   def new
     ## Intitializing the client object
     @client = Client.new
@@ -36,7 +32,6 @@ class Admin::ClientsController < Admin::BaseController
     end
   end
 
-  # GET /clients/1/edit
   def edit
     ## Fetching the client object
     @client = Client.find(params[:id])
@@ -48,7 +43,6 @@ class Admin::ClientsController < Admin::BaseController
     end
   end
 
-  # POST /clients
   def create
     ## Creating the client object
     @client = Client.new(client_params)
@@ -64,7 +58,7 @@ class Admin::ClientsController < Admin::BaseController
 
         # Setting the flash message
         message = translate("forms.created_successfully", :item => "Client")
-        store_flash_message(message, :success)
+        set_flash_message(message, :success)
 
         format.html {
           redirect_to admin_client_url(@client), notice: message
@@ -75,7 +69,7 @@ class Admin::ClientsController < Admin::BaseController
 
         # Setting the flash message
         message = @client.errors.full_messages.to_sentence
-        store_flash_message(message, :alert)
+        set_flash_message(message, :alert)
 
         format.html { render action: "new" }
         format.json { render json: @client.errors, status: :unprocessable_entity }
@@ -84,9 +78,6 @@ class Admin::ClientsController < Admin::BaseController
     end
   end
 
-  # PUT /clients/1
-  # PUT /clients/1.js
-  # PUT /clients/1.json
   def update
     ## Fetching the client
     @client = Client.find(params[:id])
@@ -105,7 +96,7 @@ class Admin::ClientsController < Admin::BaseController
 
         # Setting the flash message
         message = translate("forms.updated_successfully", :item => "Client")
-        store_flash_message(message, :success)
+        set_flash_message(message, :success)
 
         format.html {
           redirect_to admin_client_url(@client), notice: message
@@ -117,7 +108,7 @@ class Admin::ClientsController < Admin::BaseController
 
         # Setting the flash message
         message = @client.errors.full_messages.to_sentence
-        store_flash_message(message, :alert)
+        set_flash_message(message, :alert)
 
         format.html {
           render action: "edit"
@@ -129,9 +120,6 @@ class Admin::ClientsController < Admin::BaseController
     end
   end
 
-  # DELETE /clients/1
-  # DELETE /clients/1.js
-  # DELETE /clients/1.json
   def destroy
     ## Fetching the client
     @client = Client.find(params[:id])
@@ -147,7 +135,7 @@ class Admin::ClientsController < Admin::BaseController
 
       # Setting the flash message
       message = translate("forms.destroyed_successfully", :item => "Client")
-      store_flash_message(message, :success)
+      set_flash_message(message, :success)
 
       format.html {
         redirect_to admin_clients_url notice: message
@@ -178,13 +166,12 @@ class Admin::ClientsController < Admin::BaseController
       relation = relation.search(@query) if !@query.blank?
     end
 
-    @clients = relation.order("name asc").page(@current_page).per(@per_page)
+    @clients = relation.order("created_at desc").page(@current_page).per(@per_page)
 
     ## Initializing the @client object so that we can render the show partial
     @client = @clients.first unless @client
 
     return true
-
   end
 
 end

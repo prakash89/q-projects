@@ -7,51 +7,19 @@
 
     <%= @link_type.errors[:base].to_sentence %>
 
-    <%= hidden_field_tag :faction, @link_type.new_record? ? admin_link_types_path : admin_link_types_path(@link_type) %>
-    <%= hidden_field_tag :fmethod, @link_type.new_record? ? "POST" : "PUT" %>
-
     <div class="form-inputs">
 
+      <%# Name (string)  %>
+      <%= theme_form_field(@link_type, 'name') %>
 
-      <!-- Name (string) -->
-      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@link_type,
-                                              :object_name=>'link_type',
-                                              :field_name=>'name',
-                                              :display_name=>'Name',
-                                              :field_type=>'string',
-                                              :input_type=>'text',
-                                              :required=>true,
-                                              :place_holder=>"e.g: JIRA."} %>
+      <%# Description (textarea) %>
+      <%= theme_form_field(@link_type, 'description', required: false, html_options: {type: 'textarea'}) %>
 
-      <!-- Description (string) -->
-      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@link_type,
-                                              :object_name=>'link_type',
-                                              :field_name=>'description',
-                                              :display_name=>'Description',
-                                              :field_type=>'string',
-                                              :input_type=>'text',
-                                              :required=>false,
-                                              :place_holder=>"Put a suitable description"} %>
+      <%# Name (string)  %>
+      <%= theme_form_field(@link_type, 'theme', required: false) %>
 
-      <!-- Theme (string) -->
-      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@link_type,
-                                              :object_name=>'link_type',
-                                              :field_name=>'theme',
-                                              :display_name=>'Theme',
-                                              :field_type=>'string',
-                                              :input_type=>'text',
-                                              :required=>false,
-                                              :place_holder=>"e.g: Jira."} %>
-
-      <!-- Button Text (string) -->
-      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@link_type,
-                                              :object_name=>'link_type',
-                                              :field_name=>'button_text',
-                                              :display_name=>'Button Text',
-                                              :field_type=>'string',
-                                              :input_type=>'text',
-                                              :required=>false,
-                                              :place_holder=>"e.g: Launch JIRA"} %>
+      <%# Name (string)  %>
+      <%= theme_form_field(@link_type, 'button_text', required: false) %>
 
     </div>
 
@@ -60,14 +28,8 @@
   <div class="modal-footer">
 
     <div class="pull-right">
-      <% button_text = "#{@link_type.new_record? ? "Create" : "Update"} Item" %>
-			<%# if @link_type.new_record? %>
-				<%#= link_to "Cancel", "#", :class => "btn", :remote=>true %>
-			<%# else %>
-				<%#= link_to 'Back', admin_link_types_path, :class=>"btn ml-10", :remote => true unless @link_type.new_record? %>
-			<%# end %>
-      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      <%= submit_tag button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ...", :class=>"btn btn-primary ml-10" %>
+      <%= button_tag "Cancel", :type => "button", :class => "btn btn-default", "data-dismiss" => "modal" %>
+      <%= theme_form_button(@link_type) %>
     </div>
 
   </div>

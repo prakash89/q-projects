@@ -7,63 +7,26 @@
 
     <%= @project_link.errors[:base].to_sentence %>
 
-    <%= hidden_field_tag :faction, @project_link.new_record? ? admin_project_project_links_path : admin_project_project_links_path(@project_link) %>
-    <%= hidden_field_tag :fmethod, @project_link.new_record? ? "POST" : "PUT" %>
-
     <div class="form-inputs">
 
-      <!-- Choose Link Type - Drop Down -->
-      <div class="form-group">
-        <label for="inp_name" class="col-md-4 control-label">Select Link Type
-          <span class="text-color-red ml-10 mr-5 pull-right">*</span>
-        </label>
-        <div class="col-md-8 mt-5">
-          <% if @link_type %>
-            <%= @link_type.name %>
-            <%= hidden_field_tag "project_link[link_type_id]", @link_type.id %>
-          <% else %>
-            <%= collection_select(:project_link, :link_type_id, LinkType.select("id, name").all, :id, :name, {:prompt=>true}, {:class => 'form-control'}) %>
-          <% end %>
-        </div>
-      </div>
+      <% options = {assoc_collection: LinkType.select("id, name").order("name ASC").all, label: "Select Link Type"} %>
+      <%= theme_form_assoc_group(@project_link, :link_type_id, **options) %>
 
-      <!-- Url (string) -->
-      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@project_link,
-                                              :object_name=>'project_link',
-                                              :field_name=>'url',
-                                              :display_name=>'Url',
-                                              :field_type=>'string',
-                                              :input_type=>'url',
-                                              :required=>true,
-                                              :place_holder=>"Paste the url with http://"} %>
+      <%# URL (string)  %>
+      <%= theme_form_field(@project_link, 'url', place_holder: "Paste the url with http://") %>
 
-      <!-- Under Construction (boolean) -->
-      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@project_link,
-                                              :object_name=>'project_link',
-                                              :field_name=>'under_construction',
-                                              :display_name=>'Under Construction',
-                                              :field_type=>'boolean',
-                                              :input_type=>'checkbox',
-                                              :required=>true,
-                                              :place_holder=>""} %>
+      <%# Under Construction (boolean) %>
+      <%= theme_form_field(@project_link, 'under_construction', required: false, html_options: {type: "checkbox"}) %>
 
     </div>
 
   </div>
 
   <div class="modal-footer">
-
     <div class="pull-right">
-      <% button_text = "#{@project_link.new_record? ? "Create" : "Update"} Item" %>
-			<%# if @project_link.new_record? %>
-				<%#= link_to "Cancel", "#", :class => "btn", :remote=>true %>
-			<%# else %>
-				<%#= link_to 'Back', admin_project_project_links_path, :class=>"btn ml-10", :remote => true unless @project_link.new_record? %>
-			<%# end %>
-      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      <%= submit_tag button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ...", :class=>"btn btn-primary ml-10" %>
+      <%= button_tag "Cancel", :type => "button", :class => "btn btn-default", "data-dismiss" => "modal" %>
+      <%= theme_form_button(@project_link) %>
     </div>
-
   </div>
 
 	<div class="cl-10"></div>

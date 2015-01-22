@@ -4,9 +4,7 @@ class Admin::LinkTypesController < Admin::BaseController
   skip_before_filter :require_admin
   before_filter :require_super_admin
 
-  # GET /link_types
   def index
-
     get_collections
 
     respond_to do |format|
@@ -16,7 +14,6 @@ class Admin::LinkTypesController < Admin::BaseController
     end
   end
 
-  # GET /link_types/1
   def show
     ## Creating the link_type object
     @link_type = LinkType.find(params[:id])
@@ -28,7 +25,6 @@ class Admin::LinkTypesController < Admin::BaseController
     end
   end
 
-  # GET /link_types/new
   def new
     ## Intitializing the link_type object
     @link_type = LinkType.new
@@ -40,7 +36,6 @@ class Admin::LinkTypesController < Admin::BaseController
     end
   end
 
-  # GET /link_types/1/edit
   def edit
     ## Fetching the link_type object
     @link_type = LinkType.find(params[:id])
@@ -52,7 +47,6 @@ class Admin::LinkTypesController < Admin::BaseController
     end
   end
 
-  # POST /link_types
   def create
     ## Creating the link_type object
     @link_type = LinkType.new(params[:link_type].permit(:name, :description, :url ,:theme, :button_text, :under_construction))
@@ -68,7 +62,7 @@ class Admin::LinkTypesController < Admin::BaseController
 
         # Setting the flash message
         message = translate("forms.created_successfully", :item => "Link Type")
-        store_flash_message(message, :success)
+        set_flash_message(message, :success)
 
         format.html {
           redirect_to admin_link_type_url(@link_type), notice: message
@@ -79,7 +73,7 @@ class Admin::LinkTypesController < Admin::BaseController
 
         # Setting the flash message
         message = @link_type.errors.full_messages.to_sentence
-        store_flash_message(message, :alert)
+        set_flash_message(message, :alert)
 
         format.html { render action: "new" }
         format.json { render json: @link_type.errors, status: :unprocessable_entity }
@@ -88,7 +82,6 @@ class Admin::LinkTypesController < Admin::BaseController
     end
   end
 
-  # PUT /link_types/1
   def update
     ## Fetching the link_type
     @link_type = LinkType.find(params[:id])
@@ -107,7 +100,7 @@ class Admin::LinkTypesController < Admin::BaseController
 
         # Setting the flash message
         message = translate("forms.updated_successfully", :item => "Link Type")
-        store_flash_message(message, :success)
+        set_flash_message(message, :success)
 
         format.html {
           redirect_to admin_link_type_url(@link_type), notice: message
@@ -119,7 +112,7 @@ class Admin::LinkTypesController < Admin::BaseController
 
         # Setting the flash message
         message = @link_type.errors.full_messages.to_sentence
-        store_flash_message(message, :alert)
+        set_flash_message(message, :alert)
 
         format.html {
           render action: "edit"
@@ -131,7 +124,6 @@ class Admin::LinkTypesController < Admin::BaseController
     end
   end
 
-  # DELETE /link_types/1
   def destroy
     ## Fetching the link_type
     @link_type = LinkType.find(params[:id])
@@ -147,7 +139,7 @@ class Admin::LinkTypesController < Admin::BaseController
 
       # Setting the flash message
       message = translate("forms.destroyed_successfully", :item => "Link Type")
-      store_flash_message(message, :success)
+      set_flash_message(message, :success)
 
       format.html {
         redirect_to admin_link_types_url notice: message
@@ -174,7 +166,7 @@ class Admin::LinkTypesController < Admin::BaseController
       relation = relation.search(@query) if !@query.blank?
     end
 
-    @link_types = relation.order("name asc").page(@current_page).per(@per_page)
+    @link_types = relation.order("created_at desc").page(@current_page).per(@per_page)
 
     ## Initializing the @link_type object so that we can render the show partial
     @link_type = @link_types.first unless @link_type

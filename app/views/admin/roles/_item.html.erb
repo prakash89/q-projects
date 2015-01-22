@@ -1,17 +1,13 @@
+
 <%# describes about each user %>
 <div class="pull-left m-10">
 
-  <div>
- 	  <%= content_tag :div, class: "rounded", style: "width:100px;height:100px;" do %>
-      <%= display_user_image(user, width: "100%",
-            place_holder: {width: 100, height: 100, text: "Member"},
-            :url_domain => QAuthRubyClient.configuration.q_auth_url ) %>
-    <% end %>
-  </div>
- 	<%= link_to user.name, "#", :class=>"text-color-blue fs-16 mt-10" %>
-  <div class="text-color-gray fs-14"><%= role.name %></div>
+  <%= theme_user_image(user, role: role, width: 60) %>
 
-  <%= link_to raw("<i class=\"fa fa-times\"></i>"+ " Remove"), admin_project_role_path(:project_id => @project.id, :id=> role.id, :member_id => user.id), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"fs-12 text-color-red ml-20", :remote=>true, :style=>"color: #898989;" %>
+  <%#= link_to user.name, "#", :class=>"text-color-blue fs-16 mt-10" %>
+  <!-- <div class="text-color-gray fs-14"><%#= role.name %></div> -->
+
+  <%= link_to raw("<i class=\"fa fa-times\"></i>"+ " Remove"), admin_project_role_path(:project_id => @project.id, :id=> role.id, :member_id => user.id), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"fs-12 text-color-red", :remote=>true %>
 
 </div>
 

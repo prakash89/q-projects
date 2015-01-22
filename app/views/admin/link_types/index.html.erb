@@ -1,16 +1,13 @@
+<%= theme_heading("Manage Link Types") %>
 
-<div class="cl-10 hidden-xs"></div>
-
-<%# Displays to Manage the items %>
 <div class="row mb-10">
-	<div class="fs-22 col-sm-6 hidden-xs"><i class='fa fa-globe fa-lg mr-10'></i>Manage Link types</div>
-	<div class="fs-22 col-sm-6 text-align-center visible-xs"><i class='fa fa-globe fa-lg mr-10'></i>Manage Link types</div>
-	<div id="div_link_type_filters" class="col-sm-6 hidden-xs">
-		<%= render :partial=>"filters" %>
+	<div class="col-sm-6">
+		<%= theme_button('New Link Type', 'plus', new_admin_link_type_path) %>
 	</div>
+	<div class="col-sm-6">
+		<%= theme_search_form(LinkType, admin_link_types_path) %>
+  </div>
 </div>
-
-<div class="cl-10 hidden-xs"></div>
 
 <%# Renders a partial to display all the link_types %>
 <div class="row">
@@ -18,22 +15,11 @@
 		<%= render :partial=>"index" %>
 	</div>
 	<div id="div_link_type_drop_down" class="col-xs-12 visible-xs">
-		<%= render :partial=>"drop_down" %>
+		<%= theme_drop_down(@link_types, :name) %>
 	</div>
 
 	<div id="div_link_type_details" class="col-xs-12 col-sm-6">
-		<% case	params[:action] %>
-		<% when "new", "edit", "show" %>
-			<%= render :partial=>params[:action] %>
-		<% when "index" %>
-			<% if @link_types.empty? %>
-				<%= render :partial=>"summary" %>
-			<% else %>
-				<%= render :partial=>"show" %>
-			<% end %>
-		<% else %>
-			<%= render :partial=>"summary" %>
-		<% end %>
+		<%= theme_detail_box(@link_types) %>
 	</div>
 
 </div>

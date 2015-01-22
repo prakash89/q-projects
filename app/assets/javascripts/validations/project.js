@@ -8,14 +8,11 @@ function validateProjectForm() {
             minlength: 2,
             maxlength: 50
         },
-        "project[client_id]": "required",
       },
       errorElement: "span",
       errorClass: "help-block",
       messages: {
         "project[name]": "Please specify Name",
-        "project[description]": "Please specify Description",
-        "project[pretty_url]": "Please specify Pretty Url",
       },
       highlight: function(element) {
           $(element).parent().parent().addClass("has-error");

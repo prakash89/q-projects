@@ -1,3 +1,19 @@
+PATH
+  remote: /Users/kvarma/Projects/QwinixLabs/q-apps/poodle
+  specs:
+    poodle-rb (0.0.5)
+      handy-css-rails (~> 0.0, >= 0.0.7)
+      jquery-validation-rails (~> 1.12, >= 1.12.0)
+      rails (~> 4.1, >= 4.1.5)
+
+PATH
+  remote: /Users/kvarma/Projects/QwinixLabs/q-apps/q_auth_ruby_client
+  specs:
+    q_auth_ruby_client (0.0.3)
+      poodle-rb (~> 0.0.4, >= 0.0.1)
+      rails (~> 4.1, >= 4.1.5)
+      typhoeus (~> 0.6, >= 0.6.9)
+
 GIT
   remote: git://github.com/capistrano/rbenv.git
   revision: 2332dba20ec1f8c8cb7a9cd38770d71f5c4bf5a9
@@ -190,10 +206,6 @@ GEM
       cucumber (>= 0.8)
       rake
     polyglot (0.3.5)
-    poodle-rb (0.0.2)
-      handy-css-rails (~> 0.0, >= 0.0.7)
-      jquery-validation-rails (~> 1.12, >= 1.12.0)
-      rails (~> 4.1, >= 4.1.5)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -203,9 +215,6 @@ GEM
       yard (~> 0.8)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
-    q_auth_ruby_client (0.0.1)
-      rails (~> 4.1, >= 4.1.5)
-      typhoeus (~> 0.6, >= 0.6.9)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -344,11 +353,11 @@ DEPENDENCIES
   parallel_tests
   pg
   pickle
-  poodle-rb
+  poodle-rb!
   pry
   pry-doc
   pry-rails
-  q_auth_ruby_client
+  q_auth_ruby_client!
   quiet_assets
   railroady
   rails (= 4.1.5)

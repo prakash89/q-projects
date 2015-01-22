@@ -1,73 +1,42 @@
-
-<%# Displays a detailed view of the client %>
-<%# Display Flash Message if any only in case of ajax request %>
-<% if request.xhr? %>
-	<%= render :partial=>"layouts/poodle/common/flash_message" %>
-<% end %>
+<%= flash_message() -%>
 
 <div class="panel panel-default">
   <div class="panel-body" style="height:auto;">
-    <div style="height:auto;">
-
-      <div class="pull-left" style="width:30%;">
-        <% change_picture_url = upload_image_link(@client, admin_client_path(@client), :logo) %>
-        <% img_tag = display_image(@client, "logo.image.url", width: "100%", place_holder: {width: 300, height: 180, text: "<No Image>"}) %>
-        <%= link_to img_tag, change_picture_url, :remote => true %>
-        <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Change Picture"), change_picture_url, :class=>"btn btn-default btn-xs mt-10", :remote=>true %>
-      </div>
-      <div class="pull-left ml-10 text-color-gray" style="width:65%">
-
-        <div class="fs-22 text-color-green"><%= @client.name %></div>
-        <% location = @client.display_address %>
-        <% unless location.blank? %>
-          <div class="text-color-green fs-14"><i class="fa fa-map-marker"></i> <%= location %> </div>
-        <% end %>
-        <div class="fs-14 text-color-green"> <%= @client.pretty_url %></div>
-        <div class="fs-14 text-color-gray"> <%= @client.description %></div>
-      </div>
-      <div class="cl"></div>
+    <div class="pull-left" style="width:30%;">
+      <%
+        redirect_url = admin_client_path(@client)
+        change_picture_url = upload_image_link(@client, redirect_url, :logo)
+      %>
+      <%= theme_image(@client, redirect_url, :logo, "logo.image.url", change_picture_url: change_picture_url) %>
+    </div>
+    <div class="pull-left ml-10" style="width:65%;">
+      <%= theme_panel_heading(@client.name) %>
+      <%= theme_panel_sub_heading(@client.display_address, nil)  %>
+      <%= theme_panel_description(@client.pretty_url) %>
+      <%= theme_panel_description(@client.description, "fs-14 mt-10 text-color-gray") %>
     </div>
 
-  </div>
-  <div class="panel-footer">
-    <div class="clearfix fs-12 p-5">
-      <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Edit"), edit_admin_client_path(@client), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
-        <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), admin_client_path(@client), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
-    </div>
+    <div class="cl-20"></div>
+
+    <%= theme_edit_button(edit_admin_client_path(@client)) %>
+    <%= theme_delete_button(admin_client_path(@client)) %>
+
   </div>
 </div>
 
-<div id="div_client_projects">
-  <%= render :partial => "admin/clients/projects/index", :locals=>{:client => @client} %>
+<%# Display Projects %>
+<div class="panel panel-default">
+  <div id="div_client_projects" class="panel-body" style="height:auto;">
+    <%= render :partial => "admin/clients/projects/index", :locals=>{:client => @client} %>
+    <div class='cl'></div>
+  </div>
 </div>
 
-<% users = @client.users %>
-<% if users.any? %>
-  <div class="panel panel-archon mt-10">
-    <div class="panel-heading">
-      <h3 class="panel-title">Users
-        <span class="pull-right">
-          <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
-          <a href="#" class="panel-close"><i class="fa fa-times"></i></a>
-        </span>
-      </h3>
-    </div>
-    <div class="panel-body clearfix">
+<%= theme_more_widget(@client,
+          data_columns: [:id, :created_at, :updated_at],
+          super_admin: true) %>
 
-      <% users.each do |user| %>
-        <div class="pull-left" style="width:48%;margin-right:2%;">
-          <%= render :partial => "user", :locals=>{:user => user } %>
-        </div>
-      <% end %>
 
-    </div>
-  </div>
-<% end %>
 
-<% if @current_user.is_super_admin? %>
-  <%= render :partial => "widgets/more_details", :locals=>{
-                        :data_model => @client,
-                        :data_columns => [:id, :created_at, :updated_at],
-                        :heading => "Technical Details",
-                        :display_footer => false} %>
-<% end %>
+
+

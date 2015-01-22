@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :project do
-    name "Project name"
+    name "Project Name"
     description "Project description"
     pretty_url "www.google.com"
     client

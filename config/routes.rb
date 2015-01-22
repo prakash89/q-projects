@@ -52,4 +52,8 @@ QProject::Application.routes.draw do
   ## APIs
   ## ----------
 
+  # Clients API
+  get    '/api/v1/clients'            =>  "api/v1/clients#index",  :as => :api_clients
+  get    '/api/v1/clients/:id'        =>  "api/v1/clients#show",   :as => :api_client
+
 end

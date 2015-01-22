@@ -5,12 +5,9 @@
                         ) %>
   </a>
   <div class="media-body">
-    <%= link_to client.name, admin_client_path(client), :remote=>true, :class=>"media-heading text-color-blue fs-16" %>
-    <% location = client.display_address %>
-    <% unless location.blank? %>
-      <div class="text-color-green fs-12 mt-5"><i class="fa fa-map-marker"></i> <%= location %> </div>
-    <% end %>
-    <div class="text-color-gray fs-12"> <%= scrap_word(client.description, 120) %></div>
+    <%= theme_item_title(client.name, admin_client_path(client)) %>
+    <%#= theme_item_sub_title(client.display_address) %>
+    <%= theme_item_description(client.description, 150) %>
   </div>
 </div>
 

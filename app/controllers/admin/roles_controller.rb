@@ -9,7 +9,6 @@ class Admin::RolesController < Admin::BaseController
     render action: :new
   end
 
-  # GET /admin/roles/new
   def new
     ## Intitializing the role object
     @role = Role.new
@@ -20,7 +19,6 @@ class Admin::RolesController < Admin::BaseController
     end
   end
 
-  # POST /admin/roles
   def create
     ## Creating the role object
     @role = Role.new(params[:role].permit(:name))
@@ -44,7 +42,7 @@ class Admin::RolesController < Admin::BaseController
 
         # Setting the flash message
         message = translate("forms.created_successfully", :item => "Member")
-        store_flash_message(message, :success)
+        set_flash_message(message, :success)
 
         format.html {
           redirect_to role_url(@role), notice: message
@@ -54,7 +52,7 @@ class Admin::RolesController < Admin::BaseController
 
         # Setting the flash message
         message = @role.errors.full_messages.to_sentence
-        store_flash_message(message, :alert)
+        set_flash_message(message, :alert)
 
         format.html { render action: "new" }
         format.js {}
@@ -62,7 +60,6 @@ class Admin::RolesController < Admin::BaseController
     end
   end
 
-  # DELETE /admin/roles/1
   def destroy
     ## Fetching the role
     @role = Role.find(params[:id])
@@ -76,7 +73,7 @@ class Admin::RolesController < Admin::BaseController
 
       # Setting the flash message
       message = translate("forms.destroyed_successfully", :item => "Member")
-      store_flash_message(message, :success)
+      set_flash_message(message, :success)
 
     end
 

@@ -1,12 +1,15 @@
-<%# describes about each user %>
 <div class="panel panel-default media p-5">
   <a class="media-left" href="#" style="width:25%;">
     <%= display_image(link_type, "picture.image.url",
-                    place_holder: {width: 125, height: 90, text: "<No Image>"}
-                    ) %>
+                      place_holder: {width: 125, height: 90, text: "<No Image>"}
+                      ) %>
   </a>
   <div class="media-body">
-    <%= link_to link_type.name, admin_link_type_path(link_type), :remote=>true, :class=>"text-color-blue fs-14" %>
-    <div class="text-color-gray fs-11"> <%= scrap_word(link_type.description, 120) %></div>
+    <%= theme_item_title(link_type.name, admin_link_type_path(link_type)) %>
+    <%= theme_item_sub_title(link_type.theme) %>
+    <%= theme_item_description(link_type.description, 120) %>
   </div>
+
 </div>
+
+

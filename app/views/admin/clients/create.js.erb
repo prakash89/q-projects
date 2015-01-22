@@ -4,8 +4,8 @@
 	$('#div_client_details').html("<%= escape_javascript(render(:partial=>'show')) %>");
 
 	// Add the newly created item to the list
-  $("#div_client_collections").prepend("<div id=\"div_client_<%= @client.id %>\"><%= escape_javascript(render(:partial => 'item', :locals => { :client => @client })) %></div>")
-  $("#div_client_empty").hide();
+  $("#div_client_index").prepend("<div id=\"div_client_<%= @client.id %>\"><%= escape_javascript(render(:partial => 'item', :locals => { :client => @client })) %></div>")
+  $(".panel-message").hide();
 
   // Close Modal
   closeModal();

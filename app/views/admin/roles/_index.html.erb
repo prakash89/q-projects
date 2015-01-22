@@ -1,7 +1,8 @@
 <% roles = project.roles.order("name ASC") %>
+
 <div class="panel panel-archon mt-10">
   <div class="panel-heading">
-    <h3 class="panel-title">Team Members</h3>
+    <%= theme_panel_title("Team Members") %>
   </div>
   <div class="panel-body clearfix">
 
@@ -17,8 +18,8 @@
 
   </div>
 
-  <div class="panel-footer1 clearfix">
-    <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Add a new member"), new_admin_project_role_path(project), :class=>"btn btn-default btn-xs pull-right m-10", :remote=>true %>
+  <div class="clearfix">
+    <%= theme_button('Add a new member', 'plus', new_admin_project_role_path(project), {btn_type: :default, btn_size: :xs, classes: "m-10 pull-right"}) %>
   </div>
 
 </div>

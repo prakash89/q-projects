@@ -1,18 +1,18 @@
-<%# describes about each user %>
-<div class="clearfix" style="margin-bottom:5px;height:auto;">
+<a class="media-left" href="#" style="width:25%;">
+  <%= display_image(project, "logo.image.url",
+    place_holder: {width: 125, height: 90,
+                    text: "<No Image>"}) %>
+</a>
+<div class="media-body">
+  <%= link_to project.name, admin_project_path(project), :class=>"text-color-blue fs-16" %>
 
-   	<div class="visible-md visible-lg pull-left" style="width:30%;margin-right:3%">
-         <%= display_image(project, "logo.image.url",
-                        width: "100%",
-                        place_holder: {width: 65, height: 40, text: "<No Image>"}
-                        ) %>
-   	</div>
-   	<div class="pull-left" style="width:67%;">
-   		<%= link_to project.name, admin_project_path(project), :class=>"text-color-blue fs-15" %>
-   		<div class="text-color-red fs-14"> <%= project.roles.count %> members</div>
-		<div class="text-color-gray fs-13"><%= project.project_links.count %> links </div>
+  <div class='cl-10'></div>
+  <% project.users.each do |user| %>
+    <div class="pull-left ml-10">
+      <%= theme_user_image(user, width: 30) %>
     </div>
-
+  <% end %>
+  <div class="cl"></div>
 </div>
 
 

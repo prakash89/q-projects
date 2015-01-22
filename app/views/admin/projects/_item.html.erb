@@ -5,9 +5,9 @@
                       ) %>
  	</a>
   <div class="media-body">
- 		<%= link_to project.name, admin_project_path(project), :remote=>true, :class=>"text-color-blue fs-16" %>
-	  <div class="text-color-red fs-14"><%= project.client.name if project.client %></div>
-  	<div class="text-color-gray fs-12"> <%= scrap_word(project.description, 120) %></div>
+    <%= theme_item_title(project.name, admin_project_path(project)) %>
+    <%= theme_item_sub_title(project.client.name) if project.client %>
+ 		<%= theme_item_description(project.description, 120) %>
   </div>
 
 </div>

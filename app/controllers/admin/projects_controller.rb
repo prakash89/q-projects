@@ -1,8 +1,5 @@
 class Admin::ProjectsController < Admin::BaseController
 
-  #authorize_actions_for Item, :actions => {:index => :delete}
-
-  # GET /admin/projects
   def index
 
     get_collections
@@ -14,7 +11,6 @@ class Admin::ProjectsController < Admin::BaseController
     end
   end
 
-  # GET /admin/projects/1
   def show
     ## Creating the project object
     @project = Project.find(params[:id])
@@ -26,7 +22,6 @@ class Admin::ProjectsController < Admin::BaseController
     end
   end
 
-  # GET /admin/projects/new
   def new
     ## Intitializing the project object
     @project = Project.new
@@ -38,7 +33,6 @@ class Admin::ProjectsController < Admin::BaseController
     end
   end
 
-  # GET /admin/projects/1/edit
   def edit
     ## Fetching the project object
     @project = Project.find(params[:id])
@@ -50,7 +44,6 @@ class Admin::ProjectsController < Admin::BaseController
     end
   end
 
-  # POST /admin/projects
   def create
     ## Creating the project object
     @project = Project.new(project_params)
@@ -66,7 +59,7 @@ class Admin::ProjectsController < Admin::BaseController
 
         # Setting the flash message
         message = translate("forms.created_successfully", :item => "Project")
-        store_flash_message(message, :success)
+        set_flash_message(message, :success)
 
         format.html {
           redirect_to project_url(@project), notice: message
@@ -77,7 +70,7 @@ class Admin::ProjectsController < Admin::BaseController
 
         # Setting the flash message
         message = @project.errors.full_messages.to_sentence
-        store_flash_message(message, :alert)
+        set_flash_message(message, :alert)
 
         format.html { render action: "new" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -86,7 +79,6 @@ class Admin::ProjectsController < Admin::BaseController
     end
   end
 
-  # PUT /admin/projects/1
   def update
     ## Fetching the project
     @project = Project.find(params[:id])
@@ -105,7 +97,7 @@ class Admin::ProjectsController < Admin::BaseController
 
         # Setting the flash message
         message = translate("forms.updated_successfully", :item => "Project")
-        store_flash_message(message, :success)
+        set_flash_message(message, :success)
 
         format.html {
           redirect_to project_url(@project), notice: message
@@ -117,7 +109,7 @@ class Admin::ProjectsController < Admin::BaseController
 
         # Setting the flash message
         message = @project.errors.full_messages.to_sentence
-        store_flash_message(message, :alert)
+        set_flash_message(message, :alert)
 
         format.html {
           render action: "edit"
@@ -129,7 +121,6 @@ class Admin::ProjectsController < Admin::BaseController
     end
   end
 
-  # DELETE /admin/projects/1
   def destroy
     ## Fetching the project
     @project = Project.find(params[:id])
@@ -145,7 +136,7 @@ class Admin::ProjectsController < Admin::BaseController
 
       # Setting the flash message
       message = translate("forms.destroyed_successfully", :item => "Project")
-      store_flash_message(message, :success)
+      set_flash_message(message, :success)
 
       format.html {
         redirect_to projects_url notice: message
@@ -176,7 +167,7 @@ class Admin::ProjectsController < Admin::BaseController
       relation = relation.search(@query) if !@query.blank?
     end
 
-    @projects = relation.order("name asc").page(@current_page).per(@per_page)
+    @projects = relation.order("created_at desc").page(@current_page).per(@per_page)
 
     ## Initializing the @project object so that we can render the show partial
     @project = @projects.first unless @project

@@ -1,39 +1,26 @@
+<%= theme_heading("Manage Clients") %>
 
-<div class="cl-10 hidden-xs"></div>
-
-<%# Displays to Manage the items %>
 <div class="row mb-10">
-	<div class="fs-22 col-sm-6 hidden-xs mb-20"><i class='fa fa-globe fa-lg mr-10'></i>Manage Clients</div>
-	<div class="fs-22 col-sm-6 text-align-center visible-xs"><i class='fa fa-globe fa-lg mr-10 mb-20'></i>Manage Clients</div>
-	<div id="div_client_filters" class="col-sm-6">
-		<%= render :partial=>"filters" %>
+	<div class="col-sm-6">
+		<%= theme_button('New Client', 'plus', new_admin_client_path) %>
 	</div>
+	<div class="col-sm-6">
+		<%= theme_search_form(Client, admin_clients_path) %>
+  </div>
 </div>
-
-<div class="cl-10 hidden-xs"></div>
 
 <%# Renders a partial to display all the clients %>
 <div class="row">
 	<div id="div_client_index" class="col-sm-6 hidden-xs">
 		<%= render :partial=>"index" %>
 	</div>
+
 	<div id="div_client_drop_down" class="col-xs-12 visible-xs">
-		<%= render :partial=>"drop_down" %>
+		<%= theme_drop_down(@clients, :name) %>
 	</div>
 
 	<div id="div_client_details" class="col-xs-12 col-sm-6">
-		<% case	params[:action] %>
-		<% when "new", "edit", "show" %>
-			<%= render :partial=>params[:action] %>
-		<% when "index" %>
-			<% if @clients.empty? %>
-				<%= render :partial=>"summary" %>
-			<% else %>
-				<%= render :partial=>"show" %>
-			<% end %>
-		<% else %>
-			<%= render :partial=>"summary" %>
-		<% end %>
+		<%= theme_detail_box(@clients) %>
 	</div>
 
 </div>

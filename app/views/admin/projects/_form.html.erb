@@ -1,64 +1,23 @@
-
 <%# Renders a partial which is used to create a new project %>
-
 <%= form_for([:admin, @project], :html => {:id=>"form_project", :class=>"mb-0 form-horizontal", :role => "form", :method => (@project.new_record? ? :post : :put), :remote=>true}) do |f| %>
 
   <div class="modal-body">
 
     <%= @project.errors[:base].to_sentence %>
 
-    <%= hidden_field_tag :faction, @project.new_record? ? admin_projects_path : admin_projects_path(@project) %>
-    <%= hidden_field_tag :fmethod, @project.new_record? ? "POST" : "PUT" %>
-
     <div class="form-inputs">
 
+      <%# Name (string)  %>
+      <%= theme_form_field(@project, :name) %>
 
-      <!-- Name (string) -->
-      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@project,
-                                              :object_name=>'project',
-                                              :field_name=>'name',
-                                              :display_name=>'Name',
-                                              :field_type=>'string',
-                                              :input_type=>'text',
-                                              :required=>true,
-                                              :place_holder=>"e.g: Put a suitable example here."} %>
+      <% options = {assoc_collection: Client.select("id, name").order("name ASC").all, required: true, editable: false} %>
+      <%= theme_form_assoc_group(@project, :client_id, **options) %>
 
-      <!-- Choose Client - Drop Down -->
-      <div class="form-group ">
-        <label for="inp_name" class="col-md-4 control-label">
-          Client
-          <span class="text-color-red ml-10 mr-5 pull-right">*</span>
-        </label>
-        <div class="col-md-8">
-          <% if @client %>
-            <%= @client.name %>
-            <%= hidden_field_tag "project[client_id]", @designation.id %>
-          <% else %>
-            <%= collection_select(:project, :client_id, Client.select("id, name").order("name ASC").all, :id, :name, {:prompt=>true}, {:class => 'form-control'}) %>
-          <% end %>
-        </div>
-      </div>
+      <%# Description (textarea) %>
+      <%= theme_form_field(@project, 'description', required: false, html_options: {type: 'textarea'}) %>
 
-
-      <!-- Description (string) -->
-      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@project,
-                                              :object_name=>'project',
-                                              :field_name=>'description',
-                                              :display_name=>'Description',
-                                              :field_type=>'string',
-                                              :input_type=>'textarea',
-                                              :required=>false,
-                                              :place_holder=>"e.g: Put a suitable example here."} %>
-
-      <!-- Pretty Url (string) -->
-      <%= render :partial=>"layouts/poodle/common/field", :locals=>{:object=>@project,
-                                              :object_name=>'project',
-                                              :field_name=>'pretty_url',
-                                              :display_name=>'Pretty Url',
-                                              :field_type=>'string',
-                                              :input_type=>'text',
-                                              :required=>false,
-                                              :place_holder=>"a-z, A-Z, 0-9 & hyphens. No special characters and spaces"} %>
+      <%# Pretty Url (string) %>
+      <%= theme_form_field(@project, 'pretty_url', required: false) %>
 
     </div>
 
@@ -67,14 +26,8 @@
   <div class="modal-footer">
 
     <div class="pull-right">
-      <% button_text = "#{@project.new_record? ? "Create" : "Update"} Item" %>
-			<%# if @project.new_record? %>
-				<%#= link_to "Cancel", "#", :class => "btn", :remote=>true %>
-			<%# else %>
-				<%#= link_to 'Back', projects_path, :class=>"btn ml-10", :remote => true unless @project.new_record? %>
-			<%# end %>
-      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      <%= submit_tag button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ...", :class=>"btn btn-primary ml-10" %>
+      <%= button_tag "Cancel", :type => "button", :class => "btn btn-default", "data-dismiss" => "modal" %>
+      <%= theme_form_button(@project) %>
     </div>
 
   </div>
