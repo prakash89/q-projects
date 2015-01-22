@@ -1,4 +1,4 @@
-<%= flash_message() -%>
+<%= flash_message if request.xhr? -%>
 
 <div class="panel panel-default">
   <div class="panel-body" style="height:auto;">
