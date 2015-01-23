@@ -1,7 +1,7 @@
 class Admin::ClientsController < Admin::BaseController
 
   def index
-    get_collections
+    get_collections(:clients)
   end
 
   def show
@@ -21,37 +21,15 @@ class Admin::ClientsController < Admin::BaseController
 
   def create
     @client = Client.new(client_params)
-    @client.valid?
-
-    if @client.errors.blank?
-      @client.save
-
-      message = translate("forms.created_successfully", :item => "Client")
-      set_flash_message(message, :success)
-    else
-      message = @client.errors.full_messages.to_sentence
-      set_flash_message(message, :alert)
-    end
-
-    render_or_redirect(@client.errors.any?, admin_client_url(@client), "new")
+    message = translate("forms.created_successfully", :item => "Client")
+    process_client(message, "new")
   end
 
   def update
     @client = Client.find(params[:id])
     @client.assign_attributes(client_params)
-    @client.valid?
-
-    if @client.errors.blank?
-      @client.save
-
-      message = translate("forms.updated_successfully", :item => "Client")
-      set_flash_message(message, :success)
-    else
-      message = @client.errors.full_messages.to_sentence
-      set_flash_message(message, :alert)
-    end
-
-    render_or_redirect(@client.errors.any?, admin_client_url(@client), "edit")
+    message = translate("forms.updated_successfully", :item => "Client")
+    process_client(message, "edit")
   end
 
   def destroy
@@ -80,21 +58,15 @@ class Admin::ClientsController < Admin::BaseController
     params[:client].permit(:name, :description, :pretty_url ,:city, :state, :country)
   end
 
-  def get_collections
-    relation = Client.where("")
-    @filters = {}
-
-    if params[:query]
-      @query = params[:query].strip
-      relation = relation.search(@query) if !@query.blank?
+  def process_client(message, action_name)
+    @client.valid?
+    if @client.errors.blank?
+      @client.save
+      set_flash_message(message, :success)
+    else
+      message = @client.errors.full_messages.to_sentence
+      set_flash_message(message, :alert)
     end
-
-    @clients = relation.order("created_at desc").page(@current_page).per(@per_page)
-
-    ## Initializing the @client object so that we can render the show partial
-    @client = @clients.first unless @client
-
-    return true
+    render_or_redirect(@client.errors.any?, admin_client_url(@client), action_name)
   end
-
 end
