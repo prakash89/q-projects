@@ -2,23 +2,20 @@
 
 <div class="panel panel-default">
   <div class="panel-body" style="height:auto;">
-    <div style="height:auto;">
-      <div class="pull-left" style="width:30%;">
-        <%
-          redirect_url = admin_project_path(@project)
-          change_picture_url = upload_image_link(@project, redirect_url, :logo)
-        %>
-        <%= theme_image(@project, redirect_url, :logo, "logo.image.url", change_picture_url: change_picture_url) %>
-      </div>
-      <div class="pull-left ml-10" style="width:65%;">
-        <%= theme_panel_heading(@project.name) %>
-        <%= theme_panel_sub_heading(@project.client.name, admin_client_path(@project.client)) if @project.client  %>
-        <%= theme_panel_description(@project.pretty_url) %>
-        <%= theme_panel_description(@project.description, "fs-14 mt-10 text-color-gray") %>
-      </div>
-      <div class="cl"></div>
+    <div class="pull-left" style="width:30%;">
+      <%
+        redirect_url = admin_project_path(@project)
+        change_picture_url = upload_image_link(@project, redirect_url, :logo)
+      %>
+      <%= theme_image(@project, redirect_url, :logo, "logo.image.url", change_picture_url: change_picture_url) %>
     </div>
-
+    <div class="pull-left ml-10" style="width:65%;">
+      <%= theme_panel_heading(@project.name) %>
+      <%= theme_panel_sub_heading(@project.client.name, admin_client_path(@project.client)) if @project.client  %>
+      <%= theme_panel_description(@project.pretty_url) %>
+      <%= theme_panel_description(@project.description, "fs-14 mt-10 text-color-gray") %>
+    </div>
+    <div class="cl"></div>
   </div>
   <div class="panel-footer">
     <div class="clearfix fs-12 p-5">
@@ -27,15 +24,3 @@
     </div>
   </div>
 </div>
-
-<div id="div_project_members">
-  <%= render :partial => "admin/roles/index", :locals=>{:project => @project} %>
-</div>
-
-<div id="div_project_links">
-  <%= render :partial => "admin/project_links/index", :locals=>{:project => @project} %>
-</div>
-
-<%= theme_more_widget(@project,
-          data_columns: [:id, :created_at, :updated_at],
-          super_admin: true) %>

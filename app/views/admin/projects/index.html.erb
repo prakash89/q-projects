@@ -19,8 +19,13 @@
 		<%= theme_drop_down(@projects, :name) %>
 	</div>
 
-	<div id="div_project_details" class="col-xs-12 col-sm-6">
-		<%= theme_detail_box(@projects) %>
+	<div class="col-xs-12 col-sm-6">
+		<div id="div_project_show">
+			<%= theme_detail_box(@projects) %>
+		</div>
+		<div id="div_project_details">
+			<%= render :partial=>"details" %>
+		</div>
 	</div>
 
 </div>

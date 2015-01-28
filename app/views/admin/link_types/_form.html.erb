@@ -1,40 +1,40 @@
-
-<%# Renders a partial which is used to create a new link_type %>
-
 <%= form_for([:admin, @link_type], :html => {:id=>"form_link_type", :class=>"mb-0 form-horizontal", :role => "form", :method => (@link_type.new_record? ? :post : :put), :remote=>true}) do |f| %>
 
-  <div class="modal-body">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= params[:action].titleize %> Client
+    </div>
+    <div class="panel-body" style="height:auto;">
 
-    <%= @link_type.errors[:base].to_sentence %>
+      <div id="link_type_form_error">
+        <%= @link_type.errors[:base].to_sentence %>
+      </div>
 
-    <div class="form-inputs">
+      <div class="form-inputs mb-30 mt-30">
 
-      <%# Name (string)  %>
-      <%= theme_form_field(@link_type, 'name') %>
+        <%# Name (string)  %>
+        <%= theme_form_field(@link_type, 'name') %>
 
-      <%# Description (textarea) %>
-      <%= theme_form_field(@link_type, 'description', required: false, html_options: {type: 'textarea'}) %>
+        <%# Description (textarea) %>
+        <%= theme_form_field(@link_type, 'description', required: false, html_options: {type: 'textarea'}) %>
 
-      <%# Name (string)  %>
-      <%= theme_form_field(@link_type, 'theme', required: false) %>
+        <%# Name (string)  %>
+        <%= theme_form_field(@link_type, 'theme', required: false) %>
 
-      <%# Name (string)  %>
-      <%= theme_form_field(@link_type, 'button_text', required: false) %>
+        <%# Name (string)  %>
+        <%= theme_form_field(@link_type, 'button_text', required: false) %>
+
+      </div>
 
     </div>
 
-  </div>
-
-  <div class="modal-footer">
-
-    <div class="pull-right">
-      <%= button_tag "Cancel", :type => "button", :class => "btn btn-default", "data-dismiss" => "modal" %>
-      <%= theme_form_button(@link_type) %>
+    <div class="panel-footer clearfix">
+      <div class="pull-right">
+        <% show_url = @link_type.new_record? ? admin_link_types_path : admin_link_type_path(@link_type) %>
+        <%= link_to "Cancel", show_url, class: "btn btn-default", remote: true %>
+        <%= theme_form_button(@link_type) %>
+      </div>
     </div>
-
   </div>
-
-	<div class="cl-10"></div>
-
 <% end %>
 

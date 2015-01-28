@@ -29,20 +29,17 @@ function validateProjectLinkForm() {
             : 'You missed ' + errors + ' fields. They have been highlighted';
 
           // Removing the form error if it already exists
-          $("#div_project_link_js_validation_error").remove();
-
           errorHtml = "<div id='div_project_link_js_validation_error' class=\"alert alert-danger\" data-alert=\"alert\" style=\"margin-bottom:5px;\">"+ errorMessage +"</div>"
-          //$("#div_project_link_details").prepend(errorHtml);
-          $("#div_modal_generic div.modal-body-main").prepend(errorHtml);
+          $("#project_link_form_error").html(errorHtml);
 
           // Show error labels
           $("div.error").show();
-
         } else {
           // Hide error labels
           $("div.error").hide();
+
           // Removing the error message
-          $("#div_project_link_js_validation_error").remove();
+          $("#project_link_form_error").remove();
         }
       }
 

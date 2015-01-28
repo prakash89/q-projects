@@ -1,38 +1,42 @@
-<%# Renders a partial which is used to create a new project %>
 <%= form_for([:admin, @project], :html => {:id=>"form_project", :class=>"mb-0 form-horizontal", :role => "form", :method => (@project.new_record? ? :post : :put), :remote=>true}) do |f| %>
 
-  <div class="modal-body">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= params[:action].titleize %> Client
+    </div>
+    <div class="panel-body" style="height:auto;">
 
-    <%= @project.errors[:base].to_sentence %>
+      <div id="project_form_error">
+        <%= @project.errors[:base].to_sentence %>
+      </div>
 
-    <div class="form-inputs">
+      <div class="form-inputs mb-30 mt-30">
 
-      <%# Name (string)  %>
-      <%= theme_form_field(@project, :name) %>
+        <%# Name (string)  %>
+        <%= theme_form_field(@project, :name) %>
 
-      <% options = {assoc_collection: Client.select("id, name").order("name ASC").all, required: true, editable: false} %>
-      <%= theme_form_assoc_group(@project, :client_id, **options) %>
+        <% options = {assoc_collection: Client.select("id, name").order("name ASC").all, required: false, editable: false} %>
+        <%= theme_form_assoc_group(@project, :client_id, **options) %>
 
-      <%# Description (textarea) %>
-      <%= theme_form_field(@project, 'description', required: false, html_options: {type: 'textarea'}) %>
+        <%# Description (textarea) %>
+        <%= theme_form_field(@project, 'description', required: false, html_options: {type: 'textarea'}) %>
 
-      <%# Pretty Url (string) %>
-      <%= theme_form_field(@project, 'pretty_url', required: false) %>
+        <%# Pretty Url (string) %>
+        <%= theme_form_field(@project, 'pretty_url', required: false) %>
+
+      </div>
 
     </div>
 
-  </div>
-
-  <div class="modal-footer">
-
-    <div class="pull-right">
-      <%= button_tag "Cancel", :type => "button", :class => "btn btn-default", "data-dismiss" => "modal" %>
-      <%= theme_form_button(@project) %>
+    <div class="panel-footer clearfix">
+      <div class="pull-right">
+        <% show_url = @project.new_record? ? admin_projects_path : admin_project_path(@project) %>
+        <%= link_to "Cancel", show_url, class: "btn btn-default", remote: true %>
+        <%= theme_form_button(@project) %>
+      </div>
     </div>
 
   </div>
-
-	<div class="cl-10"></div>
 
 <% end %>
 

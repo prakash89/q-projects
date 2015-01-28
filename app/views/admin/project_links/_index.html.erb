@@ -1,9 +1,14 @@
 <% project_links = project.project_links.order("created_at ASC") %>
+
 <div class="panel panel-archon mt-10">
   <div class="panel-heading">
-    <h3 class="panel-title">Project Links</h3>
+    <%= theme_panel_title("Project Links", "pull-left") %>
+    <%= theme_button('Add a new link', 'plus', new_admin_project_project_link_path(project), {btn_type: :default, btn_size: :xs, classes: "pull-right"}) %>
+    <%= clear_tag(10) %>
   </div>
   <div class="panel-body clearfix">
+
+    <div id="form_project_links"></div>
 
     <table class="table table-condensed table-hover table-striped mt-20">
       <thead>
@@ -29,10 +34,6 @@
       </tbody>
     </table>
 
-  </div>
-
-  <div class="clearfix">
-    <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Add a new link"), new_admin_project_project_link_path(project), :class=>"btn btn-default btn-xs pull-right m-20", :remote=>true %>
   </div>
 
 </div>

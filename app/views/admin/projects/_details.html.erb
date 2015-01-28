@@ -1,0 +1,11 @@
+<div id="div_project_members">
+  <%= render :partial => "admin/roles/index", :locals=>{:project => @project} %>
+</div>
+
+<div id="div_project_links">
+  <%= render :partial => "admin/project_links/index", :locals=>{:project => @project} %>
+</div>
+
+<%= theme_more_widget(@project,
+          data_columns: [:id, :created_at, :updated_at],
+          super_admin: true) %>

@@ -1,5 +1,2 @@
-// Show the edit form in the right box.
-heading = "Edit Project Link";
-bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
-showModal(heading, bodyContent);
+$('#form_project_links').html("<%= escape_javascript(render(:partial=>'form')) %>");
 validateProjectLinkForm();

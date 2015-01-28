@@ -5,15 +5,11 @@ class Admin::ImagesController < Admin::BaseController
   def new
     image_type = params[:image_type] || "Image::Base"
     @image = image_type.constantize.new
-
-    render_list
   end
 
   def edit
     image_type = params[:image_type] || "Image::Base"
     @image = image_type.constantize.find(params[:id])
-
-    render_list
   end
 
   def create

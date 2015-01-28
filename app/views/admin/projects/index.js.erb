@@ -1,7 +1,8 @@
 <% if @projects.any? %>
 	// Fill the right box with first project details in the list
-	$('#div_project_details').html("<%= escape_javascript(render(:partial=>'show')) %>");
-  initPopovers();
+  $('#div_project_show').html("<%= escape_javascript(render(:partial=>'show')) %>");
+  $('#div_project_details').html("<%= escape_javascript(render(:partial=>'details')) %>");
+	initPopovers();
 
 	// Rendering the item list
 	$('#div_project_index').html("<%= escape_javascript(render(:partial=>"index")) %>");
@@ -9,5 +10,6 @@
 <% else %>
 	var noResultsText = "<%= escape_javascript(theme_panel_message(I18n.translate('forms.no_results_found')))%>";
 	$('#div_project_index').html(noResultsText);
-	$('#div_project_details').html(noResultsText);
+  $('#div_project_show').html(noResultsText);
+	$('#div_project_details').html("");
 <% end %>

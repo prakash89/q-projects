@@ -1,7 +1,11 @@
 <div class="panel panel-default media p-5">
   <a class="media-left" href="#" style="width:25%;">
     <%= display_image(link_type, "picture.image.url",
-                      place_holder: {width: 125, height: 90, text: "<No Image>"}
+                      width: "125px",
+                      place_holder: {
+                        width: 125,
+                        height: 90,
+                        text: "<No Image>"}
                       ) %>
   </a>
   <div class="media-body">

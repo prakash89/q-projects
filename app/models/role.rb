@@ -22,6 +22,7 @@ class Role < ActiveRecord::Base
   ## Validations
   validates :resource, :presence=>true, :unless => Proc.new { |x| [ConfigCenter::Roles::QDASH_SUPER_ADMIN, ConfigCenter::Roles::QDASH_ADMIN].include?(x.name) }
   validates :name, :presence=>true
+  validates :member_id, :presence=>true
   validate  :validate_role_resource_combination
 
   def validate_role_resource_combination

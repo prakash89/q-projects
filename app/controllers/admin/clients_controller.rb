@@ -6,17 +6,17 @@ class Admin::ClientsController < Admin::BaseController
 
   def show
     @client = Client.find(params[:id])
-    render_list
+    render_list(:clients)
   end
 
   def new
     @client = Client.new
-    render_list
+    render_list(:clients)
   end
 
   def edit
     @client = Client.find(params[:id])
-    render_list
+    render_list(:clients)
   end
 
   def create
@@ -33,18 +33,17 @@ class Admin::ClientsController < Admin::BaseController
   end
 
   def destroy
-    @client = Client.find(params[:id])
+    client = Client.find(params[:id])
+    client.destroy
 
-    @client.destroy
-    get_collections
-    @client = @clients and @clients.any? ? @clients.first : Client.new
+    get_collections(:clients)
 
     message = translate("forms.destroyed_successfully", :item => "Client")
     set_flash_message(message, :success)
 
     respond_to do |format|
       format.html { redirect_to admin_clients_url notice: message }
-      format.js {}
+      format.js { render :index }
     end
   end
 
@@ -63,10 +62,12 @@ class Admin::ClientsController < Admin::BaseController
     if @client.errors.blank?
       @client.save
       set_flash_message(message, :success)
+      redirect_url = admin_client_url(@client)
     else
       message = @client.errors.full_messages.to_sentence
       set_flash_message(message, :alert)
+      redirect_url = nil
     end
-    render_or_redirect(@client.errors.any?, admin_client_url(@client), action_name)
+    render_or_redirect(@client.errors.any?, redirect_url, action_name)
   end
 end

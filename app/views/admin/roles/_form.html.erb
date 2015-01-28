@@ -1,35 +1,37 @@
+<%= form_for([:admin, @project, @role], :html => {:id => "form_role", :class=>"mb-0 form-horizontal", :role => "form", :method => (@role.new_record? ? :post : :put), :remote=>true}) do |f| %>
 
-<%# Renders a partial which is used to create a new role %>
+  <div class="panel-body">
 
-<%= form_for([:admin, @project, @role], :html => {:id=>"form_role", :class=>"mb-0 form-horizontal", :role => "form", :method => (@role.new_record? ? :post : :put), :remote=>true}) do |f| %>
+    <div id="role_form_error">
+      <%= @role.errors[:base].to_sentence %>
+    </div>
 
-  <div class="modal-body">
-
-    <%= @role.errors[:base].to_sentence %>
-
-    <div class="form-inputs">
+    <div class="form-inputs mb-30 mt-30">
 
       <%# Choose User - Drop Down %>
       <% options = {assoc_collection: User.select("id, name").order("name ASC").all} %>
       <%= theme_form_assoc_group(@role, :member_id, **options) %>
+      <%= theme_form_group("", required: false) do
+        link_to("Refresh Member List", refresh_admin_project_roles_path, remote: true, class: "pull-right")
+      end %>
 
       <%# Choose Role - Drop Down %>
       <% roles = ConfigCenter::Roles::LIST %>
       <% options_list = Array[*roles.collect {|v,i| [v,v] }].sort %>
-      <%= theme_form_select_group(f, @role, :member_id, options_list, label: "Role", param_name: "name") %>
+      <%= theme_form_select_group(f, @role, :name, options_list, label: "Role", param_name: "name") %>
 
     </div>
 
-  </div>
-
-  <div class="modal-footer">
     <div class="pull-right">
-      <%= button_tag "Cancel", :type => "button", :class => "btn btn-default", "data-dismiss" => "modal" %>
-      <%= theme_form_button(@role, "Add Role") %>
+      <% show_url = admin_project_path(@project) %>
+      <%= link_to "Cancel", show_url, class: "btn btn-default btn-xs", remote: true %>
+      <%= theme_form_button(@role, "Add Role", "Adding ...", "btn btn-primary btn-xs ml-10") %>
     </div>
+    <%= clear_tag(10) %>
+
   </div>
 
-	<div class="cl-10"></div>
+  <hr/>
 
 <% end %>
 

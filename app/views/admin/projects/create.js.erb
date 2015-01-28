@@ -1,26 +1,19 @@
 <% if @project.errors.blank? %>
-
   // Fill the right box with first project details
-  $('#div_project_details').html("<%= escape_javascript(render(:partial=>'show')) %>");
-  initPopovers();
+  $('#div_project_show').html("<%= escape_javascript(render(:partial=>'show')) %>");
+  $('#div_project_details').html("<%= escape_javascript(render(:partial=>'details')) %>");
 
-	// Add the newly created item to the list
+  // Add the newly created item to the list
   $("#div_project_index").prepend("<div id=\"div_project_<%= @project.id %>\"><%= escape_javascript(render(:partial => 'item', :locals => { :project => @project })) %></div>")
   $(".panel-message").hide();
-
-  // Close Modal
-  closeModal();
-
 <% else %>
-
-  // Show the new form in the pop up form.
-  heading = "Create Project";
-  bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
-  showModal(heading, bodyContent);
+  $('#div_project_show').html("<%= escape_javascript(render(:partial=>'form')) %>");
   validateProjectForm();
 
   // Populate Server Side Errors
-  errorMessages = <%= @project.errors.full_messages.to_json.html_safe %>;
-  populateServerSideErrors('project', errorMessages);
-
+  <%
+    text = "You have few errors. They have been highlighted."
+    error_message = content_tag(:div, text, class: "alert alert-danger")
+  %>
+  $("#project_form_error").html("<%= escape_javascript(error_message) %>");
 <% end %>

@@ -19,7 +19,7 @@ QProject::Application.routes.draw do
 
     resources :projects do
       get :change_status, on: :member
-      resources :roles, :only=>[:new, :create, :destroy] do
+      resources :roles, :only=>[:index, :new, :create, :destroy] do
         collection do
           get 'refresh'
         end

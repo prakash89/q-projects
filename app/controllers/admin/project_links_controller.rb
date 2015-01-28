@@ -3,9 +3,7 @@ class Admin::ProjectLinksController < ApplicationController
   before_filter :get_project
 
   def index
-
     get_collections
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @project_links }

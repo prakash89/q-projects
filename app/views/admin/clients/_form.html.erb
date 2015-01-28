@@ -1,44 +1,46 @@
-<%# Renders a partial which is used to create a new client %>
 <%= form_for([:admin, @client], :html => {:id=>"form_client", :class=>"mb-0 form-horizontal", :role => "form", :method => (@client.new_record? ? :post : :put), :remote=>true}) do |f| %>
 
-  <div class="modal-body">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= params[:action].titleize %> Client asd
+    </div>
+    <div class="panel-body" style="height:auto;">
 
-    <%= @client.errors[:base].to_sentence %>
+      <div id="client_form_error">
+        <%= @client.errors[:base].to_sentence %>
+      </div>
 
-    <div class="form-inputs">
+      <div class="form-inputs mb-30 mt-30">
 
-      <%# Name (string)  %>
-      <%= theme_form_field(@client, :name) %>
+        <%# Name (string)  %>
+        <%= theme_form_field(@client, :name) %>
 
-      <%# Description (string)  %>
-      <%= theme_form_field(@client, :description, required: false, html_options: {type: 'textarea'}) %>
+        <%# Description (string)  %>
+        <%= theme_form_field(@client, :description, required: false, html_options: {type: 'textarea'}) %>
 
-      <%# City (string)  %>
-      <%= theme_form_field(@client, :city, required: false) %>
+        <%# City (string)  %>
+        <%= theme_form_field(@client, :city, required: false) %>
 
-      <%# State (string)  %>
-      <%= theme_form_field(@client, :state, required: false) %>
+        <%# State (string)  %>
+        <%= theme_form_field(@client, :state, required: false) %>
 
-      <%# Country (string)  %>
-      <%= theme_form_field(@client, :country, required: false) %>
+        <%# Country (string)  %>
+        <%= theme_form_field(@client, :country, required: false) %>
 
-      <%# Pretty Url (string)  %>
-      <%= theme_form_field(@client, :pretty_url, required: false) %>
+        <%# Pretty Url (string)  %>
+        <%= theme_form_field(@client, :pretty_url, required: false) %>
+
+      </div>
 
     </div>
 
-  </div>
-
-  <div class="modal-footer">
-
-    <div class="pull-right">
-      <%= button_tag "Cancel", :type => "button", :class => "btn btn-default", "data-dismiss" => "modal" %>
-      <%= theme_form_button(@client) %>
+    <div class="panel-footer clearfix">
+      <div class="pull-right">
+        <% show_url = @client.new_record? ? admin_clients_path : admin_client_path(@client) %>
+        <%= link_to "Cancel", show_url, class: "btn btn-default", remote: true %>
+        <%= theme_form_button(@client) %>
+      </div>
     </div>
-
   </div>
-
-	<div class="cl-10"></div>
-
 <% end %>
 

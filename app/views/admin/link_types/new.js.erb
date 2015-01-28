@@ -1,5 +1,2 @@
-// Show the new form in the pop up form.
-heading = "Create Link Type";
-bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
-showModal(heading, bodyContent);
+$('#div_link_type_details').html("<%= escape_javascript(render(:partial=>'form')) %>");
 validateLinkTypeForm();

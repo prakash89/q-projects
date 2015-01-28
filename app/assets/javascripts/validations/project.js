@@ -7,12 +7,12 @@ function validateProjectForm() {
             required: true,
             minlength: 2,
             maxlength: 50
-        },
+        }
       },
       errorElement: "span",
       errorClass: "help-block",
       messages: {
-        "project[name]": "Please specify Name",
+        "project[name]": "can't be blank",
       },
       highlight: function(element) {
           $(element).parent().parent().addClass("has-error");
@@ -31,20 +31,17 @@ function validateProjectForm() {
             : 'You missed ' + errors + ' fields. They have been highlighted';
 
           // Removing the form error if it already exists
-          $("#div_project_js_validation_error").remove();
-
-          errorHtml = "<div id='div_project_js_validation_error' class=\"alert alert-danger\" data-alert=\"alert\" style=\"margin-bottom:5px;\">"+ errorMessage +"</div>"
-          //$("#div_project_details").prepend(errorHtml);
-          $("#div_modal_generic div.modal-body-main").prepend(errorHtml);
+          errorHtml = "<div class=\"alert alert-danger\" data-alert=\"alert\" style=\"margin-bottom:5px;\">"+ errorMessage +"</div>"
+          $("#project_form_error").html(errorHtml);
 
           // Show error labels
           $("div.error").show();
-
         } else {
           // Hide error labels
           $("div.error").hide();
+
           // Removing the error message
-          $("#div_project_js_validation_error").remove();
+          $("#project_form_error").remove();
         }
       }
 

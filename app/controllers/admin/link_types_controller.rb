@@ -1,152 +1,49 @@
 class Admin::LinkTypesController < Admin::BaseController
 
-  #authorize_actions_for Item, :actions => {:index => :delete}
-  skip_before_filter :require_admin
-  before_filter :require_super_admin
-
   def index
-    get_collections
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @link_types }
-      format.js {}
-    end
+    get_collections(:link_types)
   end
 
   def show
-    ## Creating the link_type object
     @link_type = LinkType.find(params[:id])
-
-    respond_to do |format|
-      format.html { get_collections and render :index }
-      format.json { render json: @link_type }
-      format.js {}
-    end
+    render_list(:link_types)
   end
 
   def new
-    ## Intitializing the link_type object
     @link_type = LinkType.new
-
-    respond_to do |format|
-      format.html { get_collections and render :index }
-      format.json { render json: @link_type }
-      format.js {}
-    end
+    render_list(:link_types)
   end
 
   def edit
-    ## Fetching the link_type object
     @link_type = LinkType.find(params[:id])
-
-    respond_to do |format|
-      format.html { get_collections and render :index }
-      format.json { render json: @link_type }
-      format.js {}
-    end
+    render_list(:link_types)
   end
 
   def create
-    ## Creating the link_type object
-    @link_type = LinkType.new(params[:link_type].permit(:name, :description, :url ,:theme, :button_text, :under_construction))
-
-    ## Validating the data
-    @link_type.valid?
-
-    respond_to do |format|
-      if @link_type.errors.blank?
-
-        # Saving the link_type object
-        @link_type.save
-
-        # Setting the flash message
-        message = translate("forms.created_successfully", :item => "Link Type")
-        set_flash_message(message, :success)
-
-        format.html {
-          redirect_to admin_link_type_url(@link_type), notice: message
-        }
-        format.json { render json: @link_type, status: :created, location: @link_type }
-        format.js {}
-      else
-
-        # Setting the flash message
-        message = @link_type.errors.full_messages.to_sentence
-        set_flash_message(message, :alert)
-
-        format.html { render action: "new" }
-        format.json { render json: @link_type.errors, status: :unprocessable_entity }
-        format.js {}
-      end
-    end
+    @link_type = LinkType.new(link_type_params)
+    message = translate("forms.created_successfully", :item => "LinkType")
+    process_link_type(message, "new")
   end
 
   def update
-    ## Fetching the link_type
     @link_type = LinkType.find(params[:id])
-
-    ## Updating the @link_type object with params
-    @link_type.assign_attributes(params[:link_type].permit(:name, :description, :url ,:theme, :button_text, :under_construction))
-
-    ## Validating the data
-    @link_type.valid?
-
-    respond_to do |format|
-      if @link_type.errors.blank?
-
-        # Saving the link_type object
-        @link_type.save
-
-        # Setting the flash message
-        message = translate("forms.updated_successfully", :item => "Link Type")
-        set_flash_message(message, :success)
-
-        format.html {
-          redirect_to admin_link_type_url(@link_type), notice: message
-        }
-        format.json { head :no_content }
-        format.js {}
-
-      else
-
-        # Setting the flash message
-        message = @link_type.errors.full_messages.to_sentence
-        set_flash_message(message, :alert)
-
-        format.html {
-          render action: "edit"
-        }
-        format.json { render json: @link_type.errors, status: :unprocessable_entity }
-        format.js {}
-
-      end
-    end
+    @link_type.assign_attributes(link_type_params)
+    message = translate("forms.updated_successfully", :item => "LinkType")
+    process_link_type(message, "edit")
   end
 
   def destroy
-    ## Fetching the link_type
-    @link_type = LinkType.find(params[:id])
+    link_type = LinkType.find(params[:id])
+
+    link_type.destroy
+    get_collections(:link_types)
+
+    message = translate("forms.destroyed_successfully", :item => "LinkType")
+    set_flash_message(message, :success)
 
     respond_to do |format|
-      ## Destroying the link_type
-      @link_type.destroy
-      @link_type = LinkType.new
-
-      # Fetch the link_types to refresh ths list and details box
-      get_collections
-      @link_type = @link_types.first if @link_types and @link_types.any?
-
-      # Setting the flash message
-      message = translate("forms.destroyed_successfully", :item => "Link Type")
-      set_flash_message(message, :success)
-
-      format.html {
-        redirect_to admin_link_types_url notice: message
-      }
-      format.json { head :no_content }
-      format.js {}
-
+      format.html { redirect_to admin_link_types_url notice: message }
+      format.js { render :index }
     end
   end
 
@@ -156,23 +53,22 @@ class Admin::LinkTypesController < Admin::BaseController
     set_nav("admin/link_types")
   end
 
-  def get_collections
-    # Fetching the link_types
-    relation = LinkType.where("")
-    @filters = {}
+  def link_type_params
+    params[:link_type].permit(:name, :description, :url ,:theme, :button_text, :under_construction)
+  end
 
-    if params[:query]
-      @query = params[:query].strip
-      relation = relation.search(@query) if !@query.blank?
+  def process_link_type(message, action_name)
+    @link_type.valid?
+    if @link_type.errors.blank?
+      @link_type.save
+      set_flash_message(message, :success)
+      redirect_url = admin_link_type_url(@link_type)
+    else
+      message = @link_type.errors.full_messages.to_sentence
+      set_flash_message(message, :alert)
+      redirect_url = nil
     end
-
-    @link_types = relation.order("created_at desc").page(@current_page).per(@per_page)
-
-    ## Initializing the @link_type object so that we can render the show partial
-    @link_type = @link_types.first unless @link_type
-
-    return true
-
+    render_or_redirect(@link_type.errors.any?, redirect_url, action_name)
   end
 
 end

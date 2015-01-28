@@ -1,5 +1,2 @@
-// Show the new form in the pop up form.
-heading = "Create Project Link";
-bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
-showModal(heading, bodyContent);
+$('#form_project_links').html("<%= escape_javascript(render(:partial=>'form')) %>");
 validateProjectLinkForm();

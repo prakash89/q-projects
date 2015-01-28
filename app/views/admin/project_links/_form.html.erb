@@ -3,17 +3,19 @@
 
 <%= form_for([:admin, @project, @project_link], :html => {:id=>"form_project_link", :class=>"mb-0 form-horizontal", :role => "form", :method => (@project_link.new_record? ? :post : :put), :remote=>true}) do |f| %>
 
-  <div class="modal-body">
+  <div class="panel-body">
 
-    <%= @project_link.errors[:base].to_sentence %>
+    <div id="project_link_form_error">
+      <%= @project_link.errors[:base].to_sentence %>
+    </div>
 
-    <div class="form-inputs">
+    <div class="form-inputs mb-30 mt-30">
 
       <% options = {assoc_collection: LinkType.select("id, name").order("name ASC").all, label: "Select Link Type"} %>
       <%= theme_form_assoc_group(@project_link, :link_type_id, **options) %>
 
       <%# URL (string)  %>
-      <%= theme_form_field(@project_link, 'url', place_holder: "Paste the url with http://") %>
+      <%= theme_form_field(@project_link, :url, html_options: { place_holder: "Paste the url with http://" }) %>
 
       <%# Under Construction (boolean) %>
       <%= theme_form_field(@project_link, 'under_construction', required: false, html_options: {type: "checkbox"}) %>
@@ -22,14 +24,11 @@
 
   </div>
 
-  <div class="modal-footer">
-    <div class="pull-right">
-      <%= button_tag "Cancel", :type => "button", :class => "btn btn-default", "data-dismiss" => "modal" %>
-      <%= theme_form_button(@project_link) %>
-    </div>
+  <div class="pull-right">
+    <% show_url = admin_project_path(@project) %>
+    <%= link_to "Cancel", show_url, class: "btn btn-default btn-xs", remote: true %>
+    <%= theme_form_button(@role, "Add Link", "Adding ...", "btn btn-primary btn-xs ml-10") %>
   </div>
-
-	<div class="cl-10"></div>
 
 <% end %>
 

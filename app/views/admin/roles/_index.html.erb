@@ -2,9 +2,15 @@
 
 <div class="panel panel-archon mt-10">
   <div class="panel-heading">
-    <%= theme_panel_title("Team Members") %>
+    <%= theme_panel_title("Team Members", "pull-left") %>
+    <%= theme_button('Add a new member', 'plus', new_admin_project_role_path(project), {btn_type: :default, btn_size: :xs, classes: "pull-right"}) %>
+    <%= clear_tag(10) %>
   </div>
   <div class="panel-body clearfix">
+
+    <%= flash_message if params[:controller] == "admin/roles" && request.xhr? -%>
+
+    <div id="form_project_roles"></div>
 
     <% if roles.any? %>
       <% roles.each do |role| %>
@@ -19,7 +25,7 @@
   </div>
 
   <div class="clearfix">
-    <%= theme_button('Add a new member', 'plus', new_admin_project_role_path(project), {btn_type: :default, btn_size: :xs, classes: "m-10 pull-right"}) %>
+
   </div>
 
 </div>
