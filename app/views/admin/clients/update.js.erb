@@ -7,7 +7,7 @@
   $(".panel-message").hide();
 <% else %>
   $('#div_client_details').html("<%= escape_javascript(render(:partial=>'form')) %>");
-  // validateClientForm();
+  validateClientForm();
 
   // Populate Server Side Errors
   <%

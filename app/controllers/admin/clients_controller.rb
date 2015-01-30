@@ -22,29 +22,18 @@ class Admin::ClientsController < Admin::BaseController
   def create
     @client = Client.new(client_params)
     message = translate("forms.created_successfully", :item => "Client")
-    process_client(message, "new")
+    admin_save_item(@client, message)
   end
 
   def update
     @client = Client.find(params[:id])
     @client.assign_attributes(client_params)
     message = translate("forms.updated_successfully", :item => "Client")
-    process_client(message, "edit")
+    admin_save_item(@client, message)
   end
 
   def destroy
-    client = Client.find(params[:id])
-    client.destroy
-
-    get_collections(:clients)
-
-    message = translate("forms.destroyed_successfully", :item => "Client")
-    set_flash_message(message, :success)
-
-    respond_to do |format|
-      format.html { redirect_to admin_clients_url notice: message }
-      format.js { render :index }
-    end
+    admin_destroy(:clients, admin_clients_url)
   end
 
   private
@@ -57,17 +46,4 @@ class Admin::ClientsController < Admin::BaseController
     params[:client].permit(:name, :description, :pretty_url ,:city, :state, :country)
   end
 
-  def process_client(message, action_name)
-    @client.valid?
-    if @client.errors.blank?
-      @client.save
-      set_flash_message(message, :success)
-      redirect_url = admin_client_url(@client)
-    else
-      message = @client.errors.full_messages.to_sentence
-      set_flash_message(message, :alert)
-      redirect_url = nil
-    end
-    render_or_redirect(@client.errors.any?, redirect_url, action_name)
-  end
 end
