@@ -5,8 +5,8 @@ function validateClientForm() {
       rules: {
         "client[name]": {
             required: true,
-            minlength: 2,
-            maxlength: 50
+            minlength: 3,
+            maxlength: 250
         },
       },
       errorElement: "span",

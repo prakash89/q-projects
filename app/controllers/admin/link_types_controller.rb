@@ -54,7 +54,7 @@ class Admin::LinkTypesController < Admin::BaseController
   end
 
   def link_type_params
-    params[:link_type].permit(:name, :description, :url ,:theme, :button_text, :under_construction)
+    params[:link_type].permit(:name, :description, :url, :button_text, :under_construction)
   end
 
   def process_link_type(message, action_name)

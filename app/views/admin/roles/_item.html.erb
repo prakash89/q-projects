@@ -2,12 +2,12 @@
 <%# describes about each user %>
 <div class="pull-left m-10">
 
-  <%= theme_user_image(user, role: role, width: 60) %>
+  <%= theme_user_image(role.user, role: role, width: 60) %>
 
   <%#= link_to user.name, "#", :class=>"text-color-blue fs-16 mt-10" %>
   <!-- <div class="text-color-gray fs-14"><%#= role.name %></div> -->
 
-  <%= link_to raw("<i class=\"fa fa-times\"></i>"+ " Remove"), admin_project_role_path(:project_id => @project.id, :id=> role.id, :member_id => user.id), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"fs-12 text-color-red", :remote=>true %>
+  <%= link_to raw("<i class=\"fa fa-times\"></i>"+ " Remove"), admin_project_role_path(:project_id => role.project.id, :id=> role.id, :member_id => role.user.id), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"fs-12 text-color-red", :remote=>true %>
 
 </div>
 

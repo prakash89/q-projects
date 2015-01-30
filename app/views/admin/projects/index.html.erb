@@ -24,7 +24,7 @@
 			<%= theme_detail_box(@projects) %>
 		</div>
 		<div id="div_project_details">
-			<%= render :partial=>"details" %>
+			<%= render :partial=>"details" if @projects.any? %>
 		</div>
 	</div>
 

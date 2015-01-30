@@ -1,9 +1,7 @@
-<% roles = project.roles.order("name ASC") %>
-
 <div class="panel panel-archon mt-10">
   <div class="panel-heading">
     <%= theme_panel_title("Team Members", "pull-left") %>
-    <%= theme_button('Add a new member', 'plus', new_admin_project_role_path(project), {btn_type: :default, btn_size: :xs, classes: "pull-right"}) %>
+    <%= theme_button('Add a new member', 'plus', new_admin_project_role_path(@project), {btn_type: :default, btn_size: :xs, classes: "pull-right"}) %>
     <%= clear_tag(10) %>
   </div>
   <div class="panel-body clearfix">
@@ -12,11 +10,9 @@
 
     <div id="form_project_roles"></div>
 
-    <% if roles.any? %>
-      <% roles.each do |role| %>
-        <% role.users.each do |user| %>
-          <%= render :partial => "admin/roles/item", :locals=>{:project => project, :role => role, :user => user} %>
-        <% end %>
+    <% if @project.roles.any? %>
+      <% @project.roles.each do |role| %>
+        <%= render :partial => "admin/roles/item", :locals=>{:role => role} %>
       <% end %>
     <% else %>
       <%= content_tag :div, "There are no members in this project.", :class=>"text-align-center text-color-gray fs-14" %>

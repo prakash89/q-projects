@@ -1,6 +1,6 @@
 <%= form_for([:admin, @project, @role], :html => {:id => "form_role", :class=>"mb-0 form-horizontal", :role => "form", :method => (@role.new_record? ? :post : :put), :remote=>true}) do |f| %>
 
-  <div class="panel-body">
+  <div class="panel-body" style="padding-top:0px">
 
     <div id="role_form_error">
       <%= @role.errors[:base].to_sentence %>
@@ -10,28 +10,26 @@
 
       <%# Choose User - Drop Down %>
       <% options = {assoc_collection: User.select("id, name").order("name ASC").all} %>
-      <%= theme_form_assoc_group(@role, :member_id, **options) %>
+      <%= theme_form_assoc_group(@role, :user_id, **options) %>
       <%= theme_form_group("", required: false) do
-        link_to("Refresh Member List", refresh_admin_project_roles_path, remote: true, class: "pull-right")
+        link_to("Refresh User List", refresh_admin_project_roles_path, remote: true, class: "pull-right")
       end %>
 
       <%# Choose Role - Drop Down %>
       <% roles = ConfigCenter::Roles::LIST %>
       <% options_list = Array[*roles.collect {|v,i| [v,v] }].sort %>
       <%= theme_form_select_group(f, @role, :name, options_list, label: "Role", param_name: "name") %>
-
     </div>
 
+  </div>
+
+  <div class="panel-footer clearfix">
     <div class="pull-right">
       <% show_url = admin_project_path(@project) %>
       <%= link_to "Cancel", show_url, class: "btn btn-default btn-xs", remote: true %>
       <%= theme_form_button(@role, "Add Role", "Adding ...", "btn btn-primary btn-xs ml-10") %>
     </div>
-    <%= clear_tag(10) %>
-
   </div>
-
-  <hr/>
 
 <% end %>
 

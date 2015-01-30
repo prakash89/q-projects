@@ -1,7 +1,21 @@
 class Client < ActiveRecord::Base
 
   # Validations
-  validates :name, presence: true
+  validates :name,
+    presence: true,
+    length: {:minimum => 3, :maximum => 250 }
+
+  validates :description,
+    length: {:minimum => 3, :maximum => 2050 },
+    unless: proc {|client| client.description.blank?}
+
+  validates :pretty_url,
+    length: { :maximum => 510 },
+    format: {:with => /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\z/ix},
+    unless: proc {|client| client.pretty_url.blank?}
+
+  # Callbacks
+  before_validation :format_pretty_url, unless: proc {|client| client.pretty_url.blank?}
 
   # Associations
   has_many :projects
@@ -25,6 +39,10 @@ class Client < ActiveRecord::Base
     address_list << state unless state.blank?
     address_list << country unless country.blank?
     address_list.join(", ")
+  end
+
+  def format_pretty_url
+    self.pretty_url = "http://" + pretty_url if pretty_url && !pretty_url.start_with?("http")
   end
 
 end

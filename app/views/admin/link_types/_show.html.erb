@@ -12,7 +12,6 @@
       </div>
       <div class="pull-left ml-10 text-color-gray" style="width:65%">
         <%= theme_panel_heading(@link_type.name) %>
-        <%= theme_panel_sub_heading(@link_type.theme, nil) %>
         <%= theme_panel_description(@link_type.description) %>
       </div>
     </div>
@@ -29,11 +28,7 @@
 </div>
 
 <%= theme_more_widget(@link_type,
-          data_columns: [:theme, :button_text],
-          heading: "Link Type Details") %>
-
-<%= theme_more_widget(@link_type,
-          data_columns: [:id, :created_at, :updated_at],
+          data_columns: [:id, :created_at, :updated_at, :button_text],
           super_admin: true) %>
 
 

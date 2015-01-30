@@ -1,4 +1,1 @@
-<% if @success %>
-  // Fill the right box with first role details
-  $('#div_project_members').html("<%= escape_javascript(render(:partial=>'index', :locals=>{:project => @project})) %>");
-<% end %>
+$('#div_project_members').html("<%= escape_javascript(render(:partial=>'index', :locals=>{:project => @project})) %>");

@@ -2,7 +2,7 @@ FactoryGirl.define do
 
   sequence(:email) {|n| "user.#{n}@domain.com" }
   sequence(:username) {|n| "username#{n}" }
-  sequence(:q_auth_uid) {|n| n*100 }
+  sequence(:q_auth_uid) {|n| (n*100) }
 
   factory :user do
 
@@ -18,7 +18,7 @@ FactoryGirl.define do
     state "Karnataka"
     country "India"
 
-    q_auth_uid "designation"
+    q_auth_uid
 
     auth_token {SecureRandom.hex}
     token_created_at {Time.now}

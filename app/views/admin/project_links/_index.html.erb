@@ -10,29 +10,13 @@
 
     <div id="form_project_links"></div>
 
-    <table class="table table-condensed table-hover table-striped mt-20">
-      <thead>
-        <tr>
-          <th>Sl.</th>
-          <th>Image</th>
-          <th>Project Link</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if project_links.any? %>
-          <% project_links.each do |project_link| %>
-            <tr class="text-color-gray">
-              <%= render :partial => "admin/project_links/item", :locals=>{:project => project, :project_link => project_link} %>
-            </tr>
-          <% end %>
-        <% else %>
-          <tr class="text-color-gray">
-            <td colspan="4">There are no project links added to this project.</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% if @project.project_links.any? %>
+      <% @project.project_links.each do |project_link| %>
+        <%= render :partial => "admin/project_links/item", :locals=>{:project_link => project_link} %>
+      <% end %>
+    <% else %>
+      <%= content_tag :div, "There are no link configured for this project.", :class=>"text-align-center text-color-gray fs-14" %>
+    <% end %>
 
   </div>
 

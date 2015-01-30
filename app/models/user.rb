@@ -1,3 +1,6 @@
 class User < QAuthRubyClient::User
-  rolify
+
+  # Associations
+  has_many :roles
+  has_many :projects, through: :roles
 end

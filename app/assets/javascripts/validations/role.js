@@ -3,13 +3,13 @@ function validateRoleForm() {
     $('#form_role').validate({
       debug: true,
       rules: {
-        "role[member_id]": "required",
+        "role[user_id]": "required",
         "role[name]": "required"
       },
       errorElement: "span",
       errorClass: "help-block",
       messages: {
-        "role[member_id]": "can't be blank",
+        "role[user_id]": "can't be blank",
         "role[name]": "can't be blank",
       },
       highlight: function(element) {

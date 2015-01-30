@@ -1,9 +1,6 @@
-
-<%# Renders a partial which is used to create a new project_link %>
-
 <%= form_for([:admin, @project, @project_link], :html => {:id=>"form_project_link", :class=>"mb-0 form-horizontal", :role => "form", :method => (@project_link.new_record? ? :post : :put), :remote=>true}) do |f| %>
 
-  <div class="panel-body">
+  <div class="panel-body" style="padding-top:0px; padding-bottom:0px">
 
     <div id="project_link_form_error">
       <%= @project_link.errors[:base].to_sentence %>
@@ -24,10 +21,12 @@
 
   </div>
 
-  <div class="pull-right">
-    <% show_url = admin_project_path(@project) %>
-    <%= link_to "Cancel", show_url, class: "btn btn-default btn-xs", remote: true %>
-    <%= theme_form_button(@role, "Add Link", "Adding ...", "btn btn-primary btn-xs ml-10") %>
+  <div class="panel-footer clearfix">
+    <div class="pull-right">
+      <% show_url = admin_project_path(@project) %>
+      <%= link_to "Cancel", show_url, class: "btn btn-default btn-xs", remote: true %>
+      <%= theme_form_button(@role, "Add Link", "Adding ...", "btn btn-primary btn-xs ml-10") %>
+    </div>
   </div>
 
 <% end %>

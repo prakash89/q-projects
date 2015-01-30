@@ -4,53 +4,26 @@ class Admin::ProjectLinksController < ApplicationController
 
   def index
     get_collections
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @project_links }
-      format.js {}
-    end
   end
 
   def show
-    ## Creating the project_link object
     @project_link = ProjectLink.find(params[:id])
     @link_type = @project_link.link_type
-
-    respond_to do |format|
-      format.html { get_collections and render :index }
-      format.json { render json: @project_link }
-      format.js {}
-    end
   end
 
   def new
-    ## Intitializing the project_link object
     @project_link = ProjectLink.new
     @link_type = @project_link.link_type
-
-    respond_to do |format|
-      format.html { get_collections and render :index }
-      format.json { render json: @project_link }
-      format.js {}
-    end
   end
 
   def edit
-    ## Fetching the project_link object
     @project_link = ProjectLink.find(params[:id])
     @link_type = @project_link.link_type
-
-    respond_to do |format|
-      format.html { get_collections and render :index }
-      format.json { render json: @project_link }
-      format.js {}
-    end
   end
 
   # POST /project_links
 
   def create
-    ## Creating the project_link object
     @project_link = ProjectLink.new(params[:project_link].permit(:url, :link_type_id, :under_construction))
     @project_link.project = @project
 

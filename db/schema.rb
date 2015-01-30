@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 20150109115624) do
 
   create_table "clients", force: true do |t|
     t.string   "name"
-    t.text     "description"
+    t.string   "description", limit: 2056
     t.string   "city"
     t.string   "state"
     t.string   "country"
-    t.string   "pretty_url"
+    t.string   "pretty_url",  limit: 512
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20150109115624) do
 
   create_table "projects", force: true do |t|
     t.string   "name"
-    t.text     "description"
-    t.string   "pretty_url"
+    t.string   "description", limit: 2056
+    t.string   "pretty_url",  limit: 512
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -71,14 +71,14 @@ ActiveRecord::Schema.define(version: 20150109115624) do
 
   create_table "roles", force: true do |t|
     t.string   "name"
-    t.integer  "resource_id"
-    t.string   "resource_type"
+    t.integer  "project_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+  add_index "roles", ["project_id", "user_id"], name: "index_roles_on_project_id_and_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -110,12 +110,5 @@ ActiveRecord::Schema.define(version: 20150109115624) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["q_auth_uid"], name: "index_users_on_q_auth_uid", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
-
-  create_table "users_roles", id: false, force: true do |t|
-    t.integer "user_id"
-    t.integer "role_id"
-  end
-
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
 end

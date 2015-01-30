@@ -1,14 +1,29 @@
-<td>1.</td>
-<td><%= display_image(project_link.link_type,
-            "picture.image.url",
-            width: "30px",
-            place_holder: {width: 30, height: 30, text: "<No Image>"}
-            ) %></td>
-<td><%= project_link.link_type.name %></td>
-<td>
-  <%= link_to raw("<i class=\"fa fa-times\"></i> "), admin_project_project_link_path(project, project_link), method: :delete, data: { confirm: 'Are you sure?' }, :style=>"color: #898989;", :class=>"pull-right", :remote=>true %>
 
-  <%= link_to raw("<i class=\"fa fa-pencil\"></i>"), edit_admin_project_project_link_path(project, project_link), :class=>"pull-right mr-5", :remote=>true, :style=>"color: #898989;" %>
+<%# describes about each user %>
+<div class="pull-left m-10">
 
-  <%= link_to raw("<i class=\"fa fa-globe\"></i> Checkout Link"), project_link.url, :class=>"pull-left fs-14", :target=>"_blank" %>
-</td>
+  <div style="height:100px;">
+    <% project = project_link.project %>
+    <% link_type = project_link.link_type %>
+    <% button_text = link_type.button_text.blank? ? link_type.name : link_type.button_text %>
+    <%= link_to(display_image(link_type, "picture.image.url",
+                          width: "100px",
+                          place_holder: {
+                            width: 100,
+                            height: 100,
+                            text: button_text }
+                          ), project_link.url) %>
+
+  </div>
+
+  <div class="mt-10">
+    <%= link_to raw("<i class=\"fa fa-times text-color-red\"></i> "), admin_project_project_link_path(project, project_link), method: :delete, data: { confirm: 'Are you sure?' }, :style=>"color: #898989;", :class=>"pull-right", :remote=>true %>
+
+    <%= link_to raw("<i class=\"fa fa-pencil\"></i>"), edit_admin_project_project_link_path(project, project_link), :class=>"pull-right mr-5", :remote=>true, :style=>"color: #898989;" %>
+
+    <%= link_to raw("<i class=\"fa fa-globe text-color-green\"></i>"), project_link.url, :class=>"pull-left fs-14", :target=>"_blank" %>
+  </div>
+
+</div>
+
+
