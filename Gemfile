@@ -47,6 +47,8 @@ gem 'q_auth_ruby_client', '~> 0.0.4'
 gem 'poodle-rb', '~> 0.0.7'
 #gem 'poodle-rb', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
 
+gem "codeclimate-test-reporter", group: :test, require: nil
+
 # Use Capistrano for deployment
 group :development do
   gem "parallel_tests"
