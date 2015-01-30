@@ -1,4 +1,7 @@
 class Project < ActiveRecord::Base
+
+  extend UrlValidator
+
   # Validations
   validates :name,
     presence: true,
@@ -8,10 +11,7 @@ class Project < ActiveRecord::Base
     length: {:minimum => 3, :maximum => 2050 },
     unless: proc {|project| project.description.blank?}
 
-  validates :pretty_url,
-    length: { :maximum => 510 },
-    format: {:with => /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\z/ix},
-    unless: proc {|project| project.pretty_url.blank?}
+  validate_url :pretty_url
 
   # Callbacks
   before_validation :format_pretty_url, unless: proc {|project| project.pretty_url.blank?}
