@@ -22,109 +22,37 @@ class Admin::ProjectLinksController < ApplicationController
   end
 
   # POST /project_links
-
   def create
-    @project_link = ProjectLink.new(params[:project_link].permit(:url, :link_type_id, :under_construction))
+    @project_link = ProjectLink.new(project_link_params)
     @project_link.project = @project
-
-    ## Validating the data
-    @project_link.valid?
-
-    respond_to do |format|
-      if @project_link.errors.blank?
-
-        # Saving the project_link object
-        @project_link.save
-
-        # Setting the flash message
-        message = translate("forms.created_successfully", :item => "Project Link")
-        set_flash_message(message, :success)
-
-        format.html {
-          redirect_to admin_project_project_link_url(@project_link), notice: message
-        }
-        format.json { render json: @project_link, status: :created, location: @project_link }
-        format.js {}
-      else
-
-        # Setting the flash message
-        message = @project_link.errors.full_messages.to_sentence
-        set_flash_message(message, :alert)
-
-        format.html { render action: "new" }
-        format.json { render json: @project_link.errors, status: :unprocessable_entity }
-        format.js {}
-      end
+    @project.project_links << @project_link
+    if @project_link.errors.blank?
+      message = translate("Project Link has been added successfully")
+      set_flash_message(message, :success)
     end
   end
 
   def update
-    ## Fetching the project_link
     @project_link = ProjectLink.find(params[:id])
-
-    ## Updating the @project_link object with params
-    @project_link.assign_attributes(params[:project_link].permit(:url, :link_type_id, :under_construction))
+    @project_link.assign_attributes(project_link_params)
     @project_link.under_construction = params[:project_link][:under_construction] == "under_construction"
-
-    ## Validating the data
-    @project_link.valid?
-
-    respond_to do |format|
-      if @project_link.errors.blank?
-
-        # Saving the project_link object
-        @project_link.save
-
-        # Setting the flash message
-        message = translate("forms.updated_successfully", :item => "Project Link")
-        set_flash_message(message, :success)
-
-        format.html {
-          redirect_to admin_project_project_link_url(@project_link), notice: message
-        }
-        format.json { head :no_content }
-        format.js {}
-
-      else
-
-        # Setting the flash message
-        message = @project_link.errors.full_messages.to_sentence
-        set_flash_message(message, :alert)
-
-        format.html {
-          render action: "edit"
-        }
-        format.json { render json: @project_link.errors, status: :unprocessable_entity }
-        format.js {}
-
-      end
+    @project_link.save
+    if @project_link.errors.blank?
+      message = translate("Project Link has been updated successfully")
+      set_flash_message(message, :success)
     end
   end
 
   def destroy
-    ## Fetching the project_link
     @project_link = ProjectLink.find(params[:id])
     @success = false
-
-    ## Destroying the role
     if @project_link.destroy
-
       @success = true
-
     else
-
       # Setting the flash message
       message = translate("forms.destroyed_successfully", :item => "Project Link")
       set_flash_message(message, :success)
-
     end
-
-    respond_to do |format|
-      format.html { redirect_to admin_project_url(@project), notice: message}
-      format.js {}
-
-    end
-
   end
 
   private
@@ -135,6 +63,10 @@ class Admin::ProjectLinksController < ApplicationController
 
   def get_project
     @project = Project.find_by_id(params[:project_id])
+  end
+
+  def project_link_params
+    params[:project_link].permit(:url, :link_type_id, :under_construction)
   end
 
   def get_collections

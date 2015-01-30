@@ -18,42 +18,33 @@ class Admin::ImagesController < Admin::BaseController
     @image = image_type.constantize.new
     @image.imageable = resource
     @image.image = params[:image][:image]
-    @image.valid?
+    @image.save
+    populate_flash_message("Image has been created successfully")
 
-    @redirect_url = params[:redirect_url] || root_url
-
-    if @image.errors.blank?
-      @image.save
-
-      message = translate("forms.created_successfully", :item => "Image")
-      set_flash_message(message, :success, false)
-    else
-      message = @image.errors.full_messages.to_sentence
-      set_flash_message(message, :alert, false)
-    end
-
-    render_or_redirect(@image.errors.any?, @redirect_url, "new")
+    redirect_url = params[:redirect_url] || root_url
+    render_or_redirect(@image.errors.any?, redirect_url, "new")
   end
 
   def update
     image_type = params[:image_type] || "Image::Base"
     @image = image_type.constantize.find(params[:id])
     @image.image = params[:image][:image]
-    @image.valid?
+    @image.save
+    populate_flash_message("Image has been updated successfully")
 
-    @redirect_url = params[:redirect_url] || root_url
+    redirect_url = params[:redirect_url] || root_url
+    render_or_redirect(@image.errors.any?, redirect_url, "edit")
+  end
 
+  private
+  def populate_flash_message(message)
     if @image.errors.blank?
-      @image.save
-
-      message = translate("forms.updated_successfully", :item => "Image")
+      message = translate(message)
       set_flash_message(message, :success, false)
     else
       message = @image.errors.full_messages.to_sentence
       set_flash_message(message, :alert, false)
     end
-
-    render_or_redirect(@image.errors.any?, @redirect_url, "edit")
   end
 
 end
