@@ -20,16 +20,11 @@ class Admin::ProjectsController < Admin::BaseController
   end
 
   def create
-    @project = Project.new(project_params)
-    message = translate("forms.created_successfully", :item => "Project")
-    admin_save_item(@project, message)
+    admin_create(:projects)
   end
 
   def update
-    @project = Project.find(params[:id])
-    @project.assign_attributes(project_params)
-    message = translate("forms.updated_successfully", :item => "Project")
-    admin_save_item(@project, message)
+    admin_update(:projects)
   end
 
   def destroy
@@ -42,7 +37,7 @@ class Admin::ProjectsController < Admin::BaseController
     set_nav("admin/projects")
   end
 
-  def project_params
+  def permitted_params
     params[:project].permit(:name, :description, :pretty_url, :client_id)
   end
 

@@ -20,16 +20,11 @@ class Admin::LinkTypesController < Admin::BaseController
   end
 
   def create
-    @link_type = LinkType.new(link_type_params)
-    message = translate("forms.created_successfully", :item => "LinkType")
-    admin_save_item(@link_type, message)
+    admin_create(:link_types)
   end
 
   def update
-    @link_type = LinkType.find(params[:id])
-    @link_type.assign_attributes(link_type_params)
-    message = translate("forms.updated_successfully", :item => "LinkType")
-    admin_save_item(@link_type, message)
+    admin_update(:link_types)
   end
 
   def destroy
@@ -42,7 +37,7 @@ class Admin::LinkTypesController < Admin::BaseController
     set_nav("admin/link_types")
   end
 
-  def link_type_params
+  def permitted_params
     params[:link_type].permit(:name, :description, :url, :button_text, :under_construction)
   end
 

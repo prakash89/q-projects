@@ -20,16 +20,11 @@ class Admin::ClientsController < Admin::BaseController
   end
 
   def create
-    @client = Client.new(client_params)
-    message = translate("forms.created_successfully", :item => "Client")
-    admin_save_item(@client, message)
+    admin_create(:clients)
   end
 
   def update
-    @client = Client.find(params[:id])
-    @client.assign_attributes(client_params)
-    message = translate("forms.updated_successfully", :item => "Client")
-    admin_save_item(@client, message)
+    admin_update(:clients)
   end
 
   def destroy
@@ -42,7 +37,7 @@ class Admin::ClientsController < Admin::BaseController
     set_nav("admin/clients")
   end
 
-  def client_params
+  def permitted_params
     params[:client].permit(:name, :description, :pretty_url ,:city, :state, :country)
   end
 
