@@ -4,22 +4,22 @@
   <div class="panel-body" style="height:auto;">
     <div class="pull-left" style="width:30%;">
       <%
-        redirect_url = admin_client_path(@client)
+        redirect_url = main_app.admin_client_path(@client)
         change_picture_url = upload_image_link(@client, redirect_url, :logo)
       %>
       <%= theme_image(@client, redirect_url, :logo, "logo.image.url", change_picture_url: change_picture_url) %>
     </div>
     <div class="pull-left ml-10" style="width:65%;">
       <%= theme_panel_heading(@client.name) %>
-      <%= theme_panel_sub_heading(@client.display_address, nil)  %>
+      <%= theme_panel_sub_heading(@client.display_address, "#")  %>
       <%= theme_panel_description(@client.pretty_url) %>
       <%= theme_panel_description(@client.description, "fs-14 mt-10 text-color-gray") %>
     </div>
 
     <div class="cl-20"></div>
 
-    <%= theme_edit_button(edit_admin_client_path(@client)) %>
-    <%= theme_delete_button(admin_client_path(@client)) %>
+    <%= theme_edit_button(main_app.edit_admin_client_path(@client)) %>
+    <%= theme_delete_button(main_app.admin_client_path(@client)) %>
 
   </div>
 </div>

@@ -1,15 +1,7 @@
-class Admin::ProjectLinksController < ApplicationController
+class Admin::ProjectLinksController < Admin::BaseController
 
   before_filter :get_project
-
-  def index
-    get_collections
-  end
-
-  def show
-    @project_link = ProjectLink.find(params[:id])
-    @link_type = @project_link.link_type
-  end
+  skip_before_filter :set_navs, :parse_pagination_params
 
   def new
     @project_link = ProjectLink.new
@@ -49,17 +41,12 @@ class Admin::ProjectLinksController < ApplicationController
     if @project_link.destroy
       @success = true
     else
-      # Setting the flash message
       message = translate("forms.destroyed_successfully", :item => "Project Link")
       set_flash_message(message, :success)
     end
   end
 
   private
-
-  def set_navs
-    set_nav("admin/projects")
-  end
 
   def get_project
     @project = Project.find_by_id(params[:project_id])

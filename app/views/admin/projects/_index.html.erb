@@ -4,7 +4,7 @@
 		<%= render :partial=>"item", :locals=>{:project=>project} %>
 	</div>
 <% end %>
-<%= theme_panel_message(I18n.translate("forms.no_results_found")) if @projects.blank? %>
+<%= theme_panel_message(I18n.translate("forms.no_results")) if @projects.blank? %>
 
 <%= theme_paginate(@projects) %>
 

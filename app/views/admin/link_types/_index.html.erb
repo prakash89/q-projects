@@ -4,6 +4,6 @@
 		<%= render :partial=>"item", :locals=>{:link_type=>link_type} %>
 	</div>
 <% end %>
-<%= theme_panel_message(I18n.translate("forms.no_results_found")) if @link_types.blank? %>
+<%= theme_panel_message(I18n.translate("forms.no_results")) if @link_types.blank? %>
 
 <%= theme_paginate(@link_types) %>

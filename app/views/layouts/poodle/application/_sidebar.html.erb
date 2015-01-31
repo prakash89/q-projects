@@ -5,7 +5,7 @@
 <ul>
 
   <li class="<%= nav_class("user/dashboard") %>">
-    <%= link_to raw("<i class=\"fa fa-dashboard\"></i> Dashboard"), user_dashboard_url %>
+    <%= link_to raw("<i class=\"fa fa-dashboard\"></i> Dashboard"), main_app.user_dashboard_url %>
   </li>
 
   <% if @current_user.is_admin? %>
@@ -13,11 +13,11 @@
     <li class="heading">Admin</li>
 
     <li class="<%= nav_class("admin/clients") %>">
-      <%= link_to raw("<i class=\"fa fa-globe\"></i> Manage Clients"), admin_clients_path %>
+      <%= link_to raw("<i class=\"fa fa-globe\"></i> Manage Clients"), main_app.admin_clients_path %>
     </li>
 
     <li class="<%= nav_class("admin/projects") %>">
-      <%= link_to raw("<i class=\"fa fa-rub\"></i> Manage Projects"), admin_projects_path %>
+      <%= link_to raw("<i class=\"fa fa-rub\"></i> Manage Projects"), main_app.admin_projects_path %>
     </li>
 
   <% end %>
@@ -27,7 +27,7 @@
     <li class="heading">System Configuration</li>
 
     <li class="<%= nav_class("admin/link_types") %>">
-      <%= link_to raw("<i class=\"fa fa-link\"></i> Manage Link Types"), admin_link_types_path %>
+      <%= link_to raw("<i class=\"fa fa-link\"></i> Manage Link Types"), main_app.admin_link_types_path %>
     </li>
 
   <% end %>

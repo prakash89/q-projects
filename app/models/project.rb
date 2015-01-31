@@ -18,10 +18,10 @@ class Project < ActiveRecord::Base
 
   # Associations
   belongs_to :client
-  has_many :project_links
-  has_many :roles
+  has_many :project_links, dependent: :destroy
+  has_many :roles, dependent: :destroy
   has_many :users, through: :roles
-  has_one :logo, :as => :imageable, :dependent => :destroy, :class_name => "Image::ProjectLogo"
+  has_one :logo, as: :imageable, dependent: :destroy, class_name: "Image::ProjectLogo"
 
   # return an active record relation object with the search query in its where clause
   # Return the ActiveRecord::Relation object

@@ -4,6 +4,6 @@
     <%= render :partial=>"item", :locals=>{:client=>client} %>
   </div>
 <% end %>
-<%= theme_panel_message(I18n.translate("forms.no_results_found")) if @clients.blank? %>
+<%= theme_panel_message(I18n.translate("forms.no_results")) if @clients.blank? %>
 
 <%= theme_paginate(@clients) %>

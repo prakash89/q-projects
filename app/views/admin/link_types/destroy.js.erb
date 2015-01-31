@@ -1,7 +1,7 @@
 <% if @link_type %>
   <% if @link_type.new_record? %>
   	// Fill the right box with first link_type details
-    $('#div_link_type_details').html("<%= escape_javascript(theme_panel_message(I18n.translate('forms.no_results_found'))) %>");
+    $('#div_link_type_details').html("<%= escape_javascript(theme_panel_message(I18n.translate('forms.no_results'))) %>");
   <% else %>
   	// Render the show partial to show flash message
   	$('#div_link_type_details').html("<%= escape_javascript(render(:partial=>'show')) %>");
@@ -9,7 +9,7 @@
   // Render link_types List
   $('#div_link_type_collections').html("<%= escape_javascript(render(:partial=>'index')) %>");
 <% else %>
-  var noResultsText = "<%= theme_panel_message(I18n.translate('forms.no_results_found')) %>";
+  var noResultsText = "<%= theme_panel_message(I18n.translate('forms.no_results')) %>";
   $('#div_link_type_index').html(noResultsText);
   $('#div_link_type_details').html(noResultsText);
 <% end %>
