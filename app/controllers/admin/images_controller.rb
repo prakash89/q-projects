@@ -13,14 +13,14 @@ class Admin::ImagesController < Admin::BaseController
   end
 
   def create
-    image_type = params[:image_type] || "Image::Base"
-    resource = params[:imageable_type].constantize.find params[:imageable_id]
-    @image = image_type.constantize.new
-    @image.imageable = resource
-    @image.image = params[:image][:image]
-    @image.save
+    save_image
+    # image_type = params[:image_type] || "Image::Base"
+    # resource = params[:imageable_type].constantize.find params[:imageable_id]
+    # @image = image_type.constantize.new
+    # @image.imageable = resource
+    # @image.image = params[:image][:image]
+    # @image.save
     populate_flash_message("Image has been created successfully")
-
     redirect_url = params[:redirect_url] || root_url
     render_or_redirect(@image.errors.any?, redirect_url, "new")
   end
@@ -31,12 +31,21 @@ class Admin::ImagesController < Admin::BaseController
     @image.image = params[:image][:image]
     @image.save
     populate_flash_message("Image has been updated successfully")
-
     redirect_url = params[:redirect_url] || root_url
     render_or_redirect(@image.errors.any?, redirect_url, "edit")
   end
 
   private
+
+  def save_image
+    image_type = params[:image_type] || "Image::Base"
+    resource = params[:imageable_type].constantize.find params[:imageable_id]
+    @image = image_type.constantize.new
+    @image.imageable = resource
+    @image.image = params[:image][:image]
+    @image.save
+  end
+
   def populate_flash_message(message)
     if @image.errors.blank?
       message = translate(message)
