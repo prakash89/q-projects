@@ -6,7 +6,6 @@ describe Admin::ProjectsController, :type => :controller do
   let(:admin) {FactoryGirl.create(:admin_user)}
   let(:project_1){FactoryGirl.create(:project)}
   let(:project_2){FactoryGirl.create(:project)}
-
   let(:valid_project_params) { {project: FactoryGirl.build(:project).as_json} }
   let(:invalid_project_params) { {project: {}} }
 
