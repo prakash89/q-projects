@@ -3,51 +3,53 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 gem 'rails-api'
-gem 'pg'
-gem 'thin'
-gem 'warden'
-gem 'state_machine'
 
-gem 'linkedin'
-gem 'carrierwave'
-gem 'rolify'
-gem 'typhoeus'
+# Database
+gem 'pg'
+
+# Development Server
+gem 'thin'
+
+# To use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '3.1.2'
 
 # Oauth provider 7 client
 gem 'oauth2'
 
-# Use SCSS for stylesheets
-# gem 'sass-rails'
+# API / JSON Lib - For communicating with Q-Auth Server
+gem 'typhoeus'
 
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+# Image Upload and manipulations
+gem 'carrierwave'
+gem 'fog'
+gem 'rmagick', :require => 'RMagick'
+gem 'jquery-fileupload-rails'
 
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails'
+# AWS SDK for elastic beanstalk
+gem 'aws-sdk' # for heroku
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
+# Other Dependencies
 gem 'jquery-rails'
-
+gem 'state_machine'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails'
+gem 'therubyracer', platforms: :ruby
 gem 'jbuilder'
 
-# To use ActiveModel has_secure_password
-#gem 'bcrypt-ruby'
-gem 'bcrypt-ruby', '3.1.2'
+# Code Climate
+gem "codeclimate-test-reporter", group: :test, require: nil
+
+#gem 'q_auth_ruby_client', '~> 0.0.4', require: false
+gem 'q_auth_ruby_client', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/q_auth_ruby_client"
+#gem 'poodle-rb', '~> 0.0.8'
+gem 'poodle-rb', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
+
+# Poodle Dependencies
 gem "handy-css-rails", "0.0.7"
 gem "kaminari"
 gem "bootstrap-kaminari-views"
 gem "bootstrap-datepicker-rails"
 gem "jquery-validation-rails"
-
-gem 'q_auth_ruby_client', '~> 0.0.4'
-#gem 'q_auth_ruby_client', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/q_auth_ruby_client"
-gem 'poodle-rb', '~> 0.0.7'
-#gem 'poodle-rb', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
-
-gem "codeclimate-test-reporter", group: :test, require: nil
 
 # Use Capistrano for deployment
 group :development do
@@ -73,10 +75,12 @@ group :development, :test do
   gem "spork", "~> 1.0rc"
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'rspec-rails' # Needed for rake stats to calculate test coverage
+  gem 'rspec-rails', '~> 3.0' # Needed for rake stats to calculate test coverage
   gem "awesome_print"
   gem "quiet_assets"
 end
+
+#gem 'rails_12factor', group: :production
 
 group :it, :staging, :development, :test, :uat, :production do
   gem 'ruby-progressbar'
