@@ -10,7 +10,6 @@ describe Admin::LinkTypesController, :type => :controller do
   let(:valid_link_type_params) { {link_type: FactoryGirl.build(:link_type).as_json} }
   let(:invalid_link_type_params) { {link_type: {}} }
 
-
   context "new" do
     it "should display the form" do
       get :new, {}, {id: admin.q_auth_uid}

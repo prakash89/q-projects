@@ -1,5 +1,4 @@
 require "rails_helper"
-require 'spec_helper'
 
 describe Admin::ClientsController, :type => :controller do
 
@@ -10,9 +9,36 @@ describe Admin::ClientsController, :type => :controller do
   let(:valid_client_params) { {client: FactoryGirl.build(:client).as_json} }
   let(:invalid_client_params) { {client: {}} }
 
+  context "index" do
+    it "should return the list of clients" do
+      [client_1, client_2]
+      get :index, {}, {id: admin.q_auth_uid}
+      expect(assigns[:clients]).to match_array([client_1,client_2])
+      expect(response.status).to eq(200)
+
+      xhr :get, :index, {}, {id: admin.q_auth_uid}
+      expect(assigns[:clients]).to match_array([client_1,client_2])
+      expect(response.code).to eq("200")
+    end
+  end
+
+  context "show" do
+    it "should return a specific client" do
+      get :show, {:id => client_1.id}, {id: admin.q_auth_uid}
+      expect(assigns[:client]).to eq(client_1)
+      expect(assigns[:clients]).to match_array([client_1,client_2])
+      expect(response.status).to eq(200)
+
+      xhr :get, :show, {id: client_1.id}, {id: admin.q_auth_uid}
+      expect(assigns[:client]).to eq(client_1)
+      expect(response.code).to eq("200")
+    end
+  end
+
   context "new" do
     it "should display the form" do
       get :new, {}, {id: admin.q_auth_uid}
+      expect(assigns[:clients]).to match_array([client_1,client_2])
       expect(response.status).to eq(200)
 
       xhr :get, :new, {}, {id: admin.q_auth_uid}
@@ -59,32 +85,6 @@ describe Admin::ClientsController, :type => :controller do
       xhr :put, :update, {id: client_1.id, client: client_1.as_json.merge!({"name" =>  ""})}, {id: admin.q_auth_uid}
       expect(assigns(:client).errors.any?).to eq(true)
       expect(Client.count).to  eq 1
-      expect(response.code).to eq("200")
-    end
-  end
-
-  context "index" do
-    it "should return the clients details" do
-      [client_1, client_2]
-      get :index, {}, {id: admin.q_auth_uid}
-      expect(assigns[:clients]).to match_array([client_1,client_2])
-      expect(response.status).to eq(200)
-
-      xhr :get, :index, {}, {id: admin.q_auth_uid}
-      expect(assigns[:clients]).to match_array([client_1,client_2])
-      expect(response.code).to eq("200")
-    end
-  end
-
-  context "show" do
-    it "should return the specific client" do
-      get :show, {:id => client_1.id}, {id: admin.q_auth_uid}
-      expect(assigns[:client]).to eq(client_1)
-      expect(assigns[:clients]).to match_array([client_1,client_2])
-      expect(response.status).to eq(200)
-
-      xhr :get, :show, {id: client_1.id}, {id: admin.q_auth_uid}
-      expect(assigns[:client]).to eq(client_1)
       expect(response.code).to eq("200")
     end
   end

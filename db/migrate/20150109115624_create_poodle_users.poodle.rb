@@ -5,9 +5,9 @@ class CreatePoodleUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
 
-      t.string :name, limit: 255
+      t.string :name, limit: 256
       t.string :username, :null => false, :limit=>32
-      t.string :email, :null => false
+      t.string :email, :null => false, limit: 256
 
       t.text :biography
 
@@ -30,7 +30,7 @@ class CreatePoodleUsers < ActiveRecord::Migration
       t.string :user_type, :null => false
       t.integer :q_auth_uid, :null => false
 
-      t.string :auth_token, :null => false
+      t.string :auth_token, :null => false, limit: 512
       t.datetime :token_created_at, :null => false
 
 
